@@ -40,7 +40,7 @@ jobs:
 
       - name: Get Comment Body
         uses: actions/github-script@v5
-        id: light-house-comment
+        id: get-comment-body
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
