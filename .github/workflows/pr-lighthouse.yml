@@ -1,7 +1,10 @@
-name: Lighthouse-CI
+name: pr-lighthouse
 
 on:
   pull_request:
+
+permissions:
+  checks: write
 
 jobs:
   deploy:
