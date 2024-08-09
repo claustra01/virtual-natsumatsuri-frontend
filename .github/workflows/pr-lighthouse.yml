@@ -36,7 +36,7 @@ jobs:
         with:
           uploadArtifacts: true
           temporaryPublicStorage: true
-          urls: https://virtual-natsumatsuri-3jpy6th4da-an.a.run.app/
+          urls: https://virtual-natsumatsuri.web.app/
 
       - name: Get Comment Body
         uses: actions/github-script@v5
