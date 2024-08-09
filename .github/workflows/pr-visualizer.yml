@@ -54,7 +54,7 @@ jobs:
         if: success() && github.event.number && steps.fc.outputs.comment-id != '0'
         with:
           issue-number: ${{ github.event.number }}
-          comment-id: ${{ steps.fc.outputs.comment-id }}
+          includes-comment: "<!-- __VISUALIZER -->"
           body: |
             **Visualizer Report**
             - You can view the results [here](${{ steps.deployment.outputs.page_url }}).
