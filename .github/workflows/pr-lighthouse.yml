@@ -5,6 +5,7 @@ on:
 
 permissions:
   checks: write
+  pull-requests: write
 
 jobs:
   deploy:
