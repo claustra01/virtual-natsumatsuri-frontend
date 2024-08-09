@@ -19,7 +19,6 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_VIRTUAL_NATSUMATSURI }}
           channelId: live
           projectId: virtual-natsumatsuri
-          target: virtual-natsumatsuri-dev
 
   lighthouse:
     needs: deploy
