@@ -11,13 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        id: build
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install and Build
         run: |
           npm install
           npm run build
 
-      - uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/stats.html
+          publish_dir: ./dist/visualizer
+
+      - name: Find existing comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+          format: 'json'
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        if: success() && github.event.number && steps.fc.outputs.comment-id == '0'
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            **Visualizer Report**
+            - You can view the results [here](https://claustra01.github.io/virtual-natsumatsuri-frontend).
