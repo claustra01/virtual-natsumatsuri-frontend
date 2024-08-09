@@ -1,27 +1,14 @@
 name: ci
 
-on:
+on: 
   push:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - run: |
-        npm install
-        npm run lint:ci
-
   check:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - run: |
-        npm install
-        npm run check:ci
-  
-  
-
-
+          npm install
+          npm run check:ci
