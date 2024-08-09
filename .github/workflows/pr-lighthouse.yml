@@ -83,6 +83,7 @@ jobs:
         if: success() && github.event.number && steps.fc.outputs.comment-id != '0'
         with:
           issue-number: ${{ github.event.number }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
           includes-comment: "# Lighthouse Report"
           body: ${{ steps.get-comment-body.outputs.body }}
           edit-mode: replace
