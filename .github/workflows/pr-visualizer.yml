@@ -57,6 +57,6 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           includes-comment: "# Visualizer Report"
           body: |
-            **Visualizer Report**
+            # Visualizer Report
             - You can view the results [here](${{ steps.deployment.outputs.page_url }}).
           edit-mode: replace
