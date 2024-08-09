@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 jobs:
-  visualizer:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +21,23 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/visualizer
-          publish_branch: gh-pages
+          path: ./dist/visualizer/
+
+
+  visualizer:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/deploy-pages@v1
 
       - name: Find existing comment
         uses: peter-evans/find-comment@v2
