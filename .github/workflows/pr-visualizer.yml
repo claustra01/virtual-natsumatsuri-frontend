@@ -5,7 +5,6 @@ on:
 
 permissions:
   pull-requests: write
-  contents: read
   pages: write
   id-token: write
 
@@ -28,8 +27,10 @@ jobs:
           path: ./dist/visualizer/
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v1
+        id: deployment
+        with:
+          branch: ${{ github.head_ref }}
 
       - name: Find existing comment
         uses: peter-evans/find-comment@v2
