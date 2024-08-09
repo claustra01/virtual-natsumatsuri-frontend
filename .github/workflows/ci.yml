@@ -23,6 +23,7 @@ jobs:
           npm run spell
 
   build:
+    needs: [check, spell]
     runs-on: ubuntu-latest
 
     steps:
