@@ -1,7 +1,7 @@
 name: Lighthouse-CI
 
 on:
-  push:
+  pull_request:
 
 jobs:
   deploy:
@@ -26,8 +26,50 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          npm install && npm install -g @lhci/cli@0.14.x
-          npm run build
-          lhci autorun
-                
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        id: lighthouse
+        with:
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          urls: https://virtual-natsumatsuri-3jpy6th4da-an.a.run.app/
+
+      - name: Get Comment Body
+        uses: actions/github-script@v5
+        id: light-house-comment
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const results = ${{steps.lighthouse.outputs.manifest}}
+            const links = ${{steps.lighthouse.outputs.links}}
+            const mark = (value) => {
+            if (value >= 0.9) {
+                return '🟢';
+            } else if (value >= 0.5) {
+                return '🟡';
+            } else {
+                return '🔴';
+            }
+            };
+            const body = `
+            # Lighthouse Report
+            | URL | Performance | Accessibility | Best Practices | SEO | PWA | Details |
+            | --- | ----------- | ------------- | -------------- | --- | --- | ------- |
+            ${results.map((result) => `| ${result.url} | ${mark(result.summary.performance)}${Math.trunc(result.summary.performance * 100)} | ${mark(result.summary.accessibility)}${Math.trunc(result.summary.accessibility * 100)} | ${mark(result.summary['best-practices'])}${Math.trunc(result.summary['best-practices'] * 100)} | ${mark(result.summary.seo)}${Math.trunc(result.summary.seo * 100)} | ${mark(result.summary.pwa)}${Math.trunc(result.summary.pwa * 100)} | :pencil: [result](${links[result.url]}) |`).join('\n')}
+            `;
+            core.setOutput("body", body)
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        if: success() && github.event.number
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+
+      - name: Create Comment
+        uses: peter-evans/create-or-update-comment@v2
+        if: success() && github.event.number && steps.fc.outputs.comment-id == 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
