@@ -45,8 +45,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const results = ${{steps.lighthouse.outputs.manifest}}
-            const links = ${{steps.lighthouse.outputs.links}}
+            const results = ${{ steps.lighthouse.outputs.manifest }}
+            const links = ${{ steps.lighthouse.outputs.links }}
             const mark = (value) => {
             if (value >= 0.9) {
                 return '🟢';
