@@ -12,3 +12,21 @@ jobs:
       - run: |
           npm install
           npm run check:ci
+
+  spell:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run spell
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run build
