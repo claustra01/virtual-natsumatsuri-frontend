@@ -5,7 +5,7 @@ on:
 
 permissions:
   pull-requests: write
-  contents: read
+  pages: write
 
 jobs:
   visualizer:
@@ -25,7 +25,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/visualizer
-          publish_branch: ${{ github.head_ref }}
+          publish_branch: gh-pages
 
       - name: Find existing comment
         uses: peter-evans/find-comment@v2
@@ -34,11 +34,11 @@ jobs:
           issue-number: ${{ github.event.number }}
           format: 'json'
 
-      - name: Create comment
+      - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v2
         if: success() && github.event.number && steps.fc.outputs.comment-id == '0'
         with:
           issue-number: ${{ github.event.number }}
           body: |
             **Visualizer Report**
-            - You can view the results [here](https://claustra01.github.io/virtual-natsumatsuri-frontend).
+            - You can view the results [here](https://claustra01.github.io/virtual-natsumatsuri-frontend/visualizer).
