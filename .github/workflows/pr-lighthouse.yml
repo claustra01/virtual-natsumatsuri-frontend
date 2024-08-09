@@ -84,7 +84,5 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
-          body: |
-            **Visualizer Report**
-            - You can view the results [here](${{ steps.deployment.outputs.page_url }}).
+          body: ${{ steps.get-comment-body.outputs.body }}
           edit-mode: replace
