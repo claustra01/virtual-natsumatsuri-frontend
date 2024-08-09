@@ -1,0 +1,33 @@
+name: ci
+
+on: 
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run check:ci
+
+  spell:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run spell
+
+  build:
+    needs: [check, spell]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run build
