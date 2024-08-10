@@ -8,22 +8,22 @@ import styles from "./index.module.css";
 function HomePC() {
 	const navigate = useNavigate();
 	const setRef = useSocketRefStore((state) => state.setRef);
-	
+
 	const handleClick = () => {
 		requestPermission();
-    const socketRef = new WebSocket(
-      `wss://${import.meta.env.VITE_HOST_NAME || "virtual-natsumatsuri-3jpy6th4da-an.a.run.app"}/ws?room_id=2`
-    );
-    setRef({ current: socketRef });
-    const audio = new Audio("/sound/wadaiko.mp3");
-    audio
-      .play()
-      .then(() => {
-        setTimeout(() => {}, 500);
-      })
-      .catch((error) => {
-        console.error("オーディオの音が出なかった", error);
-      });
+		const socketRef = new WebSocket(
+			`wss://${import.meta.env.VITE_HOST_NAME || "virtual-natsumatsuri-3jpy6th4da-an.a.run.app"}/ws?room_id=2`,
+		);
+		setRef({ current: socketRef });
+		const audio = new Audio("/sound/wadaiko.mp3");
+		audio
+			.play()
+			.then(() => {
+				setTimeout(() => {}, 500);
+			})
+			.catch((error) => {
+				console.error("オーディオの音が出なかった", error);
+			});
 		navigate("/yatai");
 	};
 
