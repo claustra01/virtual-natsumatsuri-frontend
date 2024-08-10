@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@react-three/cannon':
+        specifier: ^6.6.0
+        version: 6.6.0(@react-three/fiber@8.16.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.167.1))(react@18.3.1)(three@0.167.1)(typescript@5.5.4)
       '@react-three/fiber':
         specifier: ^8.16.8
         version: 8.16.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.167.1)
@@ -505,6 +508,18 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@pmndrs/cannon-worker-api@2.4.0':
+    resolution: {integrity: sha512-oJA1Bboc+WObksRaGDKJG0Wna9Q75xi1MdXVAZ9qXzBOyPsadmAnrmiKOEF0R8v/4zsuJElvscNZmyo3msbZjA==}
+    peerDependencies:
+      three: '>=0.139'
+
+  '@react-three/cannon@6.6.0':
+    resolution: {integrity: sha512-lP9rJoVHQi0w+dYF8FJAm2xr5eLfNEckb04j72kjqndUkuOPr26N4rSBhQbHl5b5N3tEnhQaIMungAvHkcY8/A==}
+    peerDependencies:
+      '@react-three/fiber': '>=8'
+      react: '>=18'
+      three: '>=0.139'
+
   '@react-three/fiber@8.16.8':
     resolution: {integrity: sha512-Lc8fjATtvQEfSd8d5iKdbpHtRm/aPMeFj7jQvp6TNHfpo8IQTW3wwcE1ZMrGGoUH+w2mnyS+0MK1NLPLnuzGkQ==}
     peerDependencies:
@@ -842,6 +857,19 @@ packages:
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+
+  cannon-es-debugger@1.0.0:
+    resolution: {integrity: sha512-sE9lDOBAYFKlh+0w+cvWKwUhJef8HYnUSVPWPL0jD15MAuVRQKno4QYZSGxgOoJkMR3mQqxL4bxys2b3RSWH8g==}
+    peerDependencies:
+      cannon-es: 0.x
+      three: 0.x
+      typescript: '>=3.8'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  cannon-es@0.20.0:
+    resolution: {integrity: sha512-eZhWTZIkFOnMAJOgfXJa9+b3kVlvG+FX4mdkpePev/w/rP5V8NRquGyEozcjPfEoXUlb+p7d9SUcmDSn14prOA==}
 
   chalk-template@1.1.0:
     resolution: {integrity: sha512-T2VJbcDuZQ0Tb2EWwSotMPJjgpy1/tGee1BTpUNsGZ/qgNjV2t7Mvu+d4600U564nbLesN1x2dPL+xii174Ekg==}
@@ -1946,6 +1974,21 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
+  '@pmndrs/cannon-worker-api@2.4.0(three@0.167.1)':
+    dependencies:
+      three: 0.167.1
+
+  '@react-three/cannon@6.6.0(@react-three/fiber@8.16.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.167.1))(react@18.3.1)(three@0.167.1)(typescript@5.5.4)':
+    dependencies:
+      '@pmndrs/cannon-worker-api': 2.4.0(three@0.167.1)
+      '@react-three/fiber': 8.16.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.167.1)
+      cannon-es: 0.20.0
+      cannon-es-debugger: 1.0.0(cannon-es@0.20.0)(three@0.167.1)(typescript@5.5.4)
+      react: 18.3.1
+      three: 0.167.1
+    transitivePeerDependencies:
+      - typescript
+
   '@react-three/fiber@8.16.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.167.1)':
     dependencies:
       '@babel/runtime': 7.25.0
@@ -2241,6 +2284,15 @@ snapshots:
       ieee754: 1.2.1
 
   callsites@3.1.0: {}
+
+  cannon-es-debugger@1.0.0(cannon-es@0.20.0)(three@0.167.1)(typescript@5.5.4):
+    dependencies:
+      cannon-es: 0.20.0
+      three: 0.167.1
+    optionalDependencies:
+      typescript: 5.5.4
+
+  cannon-es@0.20.0: {}
 
   chalk-template@1.1.0:
     dependencies:
