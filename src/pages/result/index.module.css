@@ -1,0 +1,6 @@
+.result-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+}
