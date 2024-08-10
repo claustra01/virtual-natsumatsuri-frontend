@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DefaultButton } from "../../components/ui/Button";
 import { useSocketRefStore } from "../../store";
 import { device } from "../../utils/device";
 import { requestPermission } from "../../utils/permission";
 import styles from "./index.module.css";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
 	const navigate = useNavigate();
