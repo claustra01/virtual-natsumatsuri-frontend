@@ -16,7 +16,16 @@ function Shooter() {
 	const [images, setImages] = useState(initialImages);
 
 	const handleClick = () => {
-		setImages((prevImages) => prevImages.slice(1));
+		const audio = new Audio("/sound/cork_sound.mp3");
+		audio
+			.play()
+			.then(() => {
+				setImages((prevImages) => prevImages.slice(1));
+			})
+			.catch((error) => {
+				console.error("オーディオの音が出なかった", error);
+				setImages((prevImages) => prevImages.slice(1));
+			});
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLDivElement> = (event) => {

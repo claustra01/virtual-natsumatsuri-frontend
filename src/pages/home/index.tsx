@@ -24,7 +24,18 @@ function Home() {
 	}, []);
 
 	const handleClick = () => {
-		window.location.href = isPcScreen ? "/yatai" : "/shooter";
+		const audio = new Audio("/sound/wadaiko.mp3");
+		audio
+			.play()
+			.then(() => {
+				setTimeout(() => {
+					window.location.href = isPcScreen ? "/yatai" : "/shooter";
+				}, 500);
+			})
+			.catch((error) => {
+				console.error("オーディオの音が出なかった", error);
+				window.location.href = isPcScreen ? "/yatai" : "/shooter";
+			});
 	};
 
 	return (
