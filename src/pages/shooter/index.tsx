@@ -3,7 +3,7 @@ import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
-import { useSocketRefStore } from "../../store";
+import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, message_type } from "../../type/schema";
 import style from "./index.module.css";
 
@@ -19,6 +19,7 @@ const Shooter = () => {
 	];
 
 	const [images, setImages] = useState(initialImages);
+	const uuid = useUUIDStore((state) => state.uuid);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
@@ -29,7 +30,7 @@ const Shooter = () => {
 				console.error("オーディオの音が出なかった", error);
 			});
 		const data: Schema = {
-			id: "shooter",
+			id: uuid,
 			interval: 0,
 			angle: {
 				x: orientationDiff.beta,
