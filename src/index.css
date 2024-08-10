@@ -3,6 +3,11 @@
   line-height: 1.5;
   font-weight: 400;
   font-style: normal;
+
+  --black: #212121;
+  --white: #ffffff;
+  --red: #FF3131;
+  --yellow: #FFF501;
 }
 
 a {
