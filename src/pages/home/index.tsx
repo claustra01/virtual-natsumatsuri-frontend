@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { DefaultButton } from "../../components/ui/Button";
 import { useSocketRefStore } from "../../store";
 import { device } from "../../utils/device";
-import { requestPermission } from "../../utils/parmission";
+import { requestPermission } from "../../utils/permission";
 import styles from "./index.module.css";
 
 function Home() {
