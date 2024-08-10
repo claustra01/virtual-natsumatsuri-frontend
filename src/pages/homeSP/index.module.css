@@ -1,0 +1,64 @@
+@keyframes infinity-scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.scroll-infinity__wrap {
+    display: flex;
+    overflow: hidden;
+    width: 100vw;
+}
+
+.scroll-infinity__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.scroll-infinity__list--left {
+    animation: infinity-scroll-left 80s infinite linear 0.5s both;
+}
+
+.scroll-infinity__item {
+    width: 100vw;
+}
+
+.scroll-infinity__item > img {
+    width: 100%;
+}
+
+.background-logo {
+    opacity: 0.2;
+    position: absolute;
+    top: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+}
+
+li {
+    font-size: 24px; 
+    padding: 0 24px;
+}
+
+.go-game-sp {
+    position: absolute;
+    top: 40%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    width: 80%; 
+    text-align: center; 
+}
+
+.go-game-sp button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 18px; 
+}
