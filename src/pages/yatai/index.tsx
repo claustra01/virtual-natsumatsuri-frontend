@@ -1,5 +1,6 @@
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
 import styles from "./index.module.css";
+import { useState } from "react";
 
 function Yatai() {
 	// 土台
@@ -14,10 +15,12 @@ function Yatai() {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
+		// 一旦ホバーでアクションを起こす
+		const [isActive, setIsActive] = useState<boolean>(false);
 		return (
-			<mesh {...props} castShadow receiveShadow>
+			<mesh {...props} castShadow receiveShadow onPointerOver={() => setIsActive(!isActive)}>
 				<boxGeometry args={[0.7, 2, 0.7]} />
-				<meshStandardMaterial color={"yellow"} />
+				<meshStandardMaterial color={isActive ? "black" : "yellow"} />
 			</mesh>
 		);
 	};
