@@ -2,6 +2,8 @@ name: pr-lighthouse
 
 on:
   pull_request:
+    types: [opened]
+  workflow_dispatch:
 
 permissions:
   checks: write
