@@ -3,7 +3,6 @@ import styles from "./index.module.css";
 
 function Home() {
 	return (
-    
 		<div>
 			<div className={styles["scroll-infinity"]}>
 				<div className={styles["scroll-infinity__wrap"]}>
