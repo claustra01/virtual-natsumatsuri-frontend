@@ -1,5 +1,6 @@
 import { Physics, useBox } from "@react-three/cannon";
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -8,9 +9,25 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
+import { useSocketRefStore } from "../../store";
 import styles from "./index.module.css";
 
 function Yatai() {
+	const socketRef = useSocketRefStore((state) => state.socketRef);
+
+	useEffect(() => {
+		const onMessage = (event: MessageEvent) => {
+			const data = JSON.parse(event.data);
+			// サーバーから受け取ったデータを使って処理をする
+			console.log(data);
+		};
+		const currentSocketRef = socketRef?.current;
+		currentSocketRef?.addEventListener("message", onMessage);
+		return () => {
+			currentSocketRef?.removeEventListener("message", onMessage);
+		};
+	}, [socketRef]);
+
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
 		const args: [number, number, number] = [10, 2, 2];
