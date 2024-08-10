@@ -23,3 +23,40 @@
     width: 72px;
     height: 72px;
 }
+.button-style {
+    position: absolute;
+    bottom: 6%;
+    right: 4%;
+  }
+  
+  .modal-wrapper {
+    padding: 24px 0;
+    border-radius: 8px;
+    background-color: white;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;  
+    align-items: center;  
+}
+
+.modal-description {
+    font-size: 18px;
+    padding: 0 36px;
+    text-align: center;  
+}
+
+.modal-selection-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center; 
+}
+
+.modal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
