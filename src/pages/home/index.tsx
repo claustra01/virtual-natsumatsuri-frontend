@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { DefaultButton } from "../../components/ui/Button";
-import styles from "./index.module.css";
 import { device } from "../../utils/device";
+import styles from "./index.module.css";
 
 function Home() {
-    const [isPcScreen, setIsPcScreen] = useState(window.matchMedia(device.pc).matches);
+	const [isPcScreen, setIsPcScreen] = useState(
+		window.matchMedia(device.pc).matches,
+	);
 
 	useEffect(() => {
-        const mediaQuery = window.matchMedia(device.pc);
+		const mediaQuery = window.matchMedia(device.pc);
 
-        const handleChange = (event: { matches: boolean | ((prevState: boolean) => boolean); }) => {
-            setIsPcScreen(event.matches);
-        };
+		const handleChange = (event: {
+			matches: boolean | ((prevState: boolean) => boolean);
+		}) => {
+			setIsPcScreen(event.matches);
+		};
 
-        mediaQuery.addEventListener('change', handleChange);
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, []);
+		mediaQuery.addEventListener("change", handleChange);
+		return () => {
+			mediaQuery.removeEventListener("change", handleChange);
+		};
+	}, []);
 
 	const handleClick = () => {
-        window.location.href = isPcScreen ? '/gallery' : '/shooter';
-    };
-
+		window.location.href = isPcScreen ? "/gallery" : "/shooter";
+	};
 
 	return (
 		<div>
@@ -51,7 +54,9 @@ function Home() {
 					height="350"
 				/>
 			</div>
-			<div className={`${styles["go-game"]} ${isPcScreen ? styles["go-game-pc"] : ''}`}>
+			<div
+				className={`${styles["go-game"]} ${isPcScreen ? styles["go-game-pc"] : ""}`}
+			>
 				<DefaultButton color="red" size="lg" onClick={handleClick}>
 					射的へ向かう
 				</DefaultButton>
