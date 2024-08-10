@@ -2,6 +2,7 @@ import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
 import styles from "./index.module.css";
 
 function Yatai() {
+	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
 		return (
 			<mesh {...props} castShadow receiveShadow>
@@ -11,6 +12,7 @@ function Yatai() {
 		);
 	};
 
+	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
 		return (
 			<mesh {...props} castShadow receiveShadow>
@@ -30,7 +32,9 @@ function Yatai() {
 	return (
 		<div className={styles.canvas}>
 			<Canvas shadows camera={{ fov: 25 }}>
+				{/* 全体ライト */}
 				<ambientLight intensity={Math.PI / 16} />
+				{/* スポットライト */}
 				<spotLight
 					castShadow
 					position={[4, 12, 8]}
