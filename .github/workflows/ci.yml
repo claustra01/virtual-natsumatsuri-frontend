@@ -9,18 +9,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
       - run: |
           npm install
-          npm run check:ci
+          npm check:ci
 
   spell:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
       - run: |
-          npm install
-          npm run spell
+          pnpm install
+          pnpm spell
 
   build:
     needs: [check, spell]
@@ -28,6 +32,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
       - run: |
-          npm install
-          npm run build
+          pnpm install
+          pnpm build
