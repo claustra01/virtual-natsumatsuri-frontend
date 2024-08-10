@@ -4,8 +4,11 @@ import { useSocketRefStore } from "../../store";
 import { device } from "../../utils/device";
 import { requestPermission } from "../../utils/permission";
 import styles from "./index.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+	const navigate = useNavigate();
+
 	const [isPcScreen, setIsPcScreen] = useState(
 		window.matchMedia(device.pc).matches,
 	);
@@ -32,19 +35,20 @@ function Home() {
 			.play()
 			.then(() => {
 				setTimeout(() => {
-					window.location.href = isPcScreen ? "/yatai" : "/shooter";
+					isPcScreen ? navigate("/yatai") : navigate("/shooter");
 				}, 500);
 			})
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
-				window.location.href = isPcScreen ? "/yatai" : "/shooter";
+				isPcScreen ? navigate("/yatai") : navigate("/shooter");
 			});
 		requestPermission();
+		console.log(import.meta.env.VITE_HOST_NAME);
 		const socketRef = new WebSocket(
-			`wss://${import.meta.env.VITE_HOST_NAME}/ws`,
+			`ws://${import.meta.env.VITE_HOST_NAME}/ws?room_id=1`,
 		);
 		setRef({ current: socketRef });
-		window.location.href = isPcScreen ? "/yatai" : "/shooter";
+		isPcScreen ? navigate("/yatai") : navigate("/shooter");
 	};
 
 	return (

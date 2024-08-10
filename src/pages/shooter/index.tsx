@@ -4,7 +4,7 @@ import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketRefStore, useUUIDStore } from "../../store";
-import { type Schema, message_type } from "../../type/schema";
+import { type Schema, event_type, message_type } from "../../type/schema";
 import style from "./index.module.css";
 
 const Shooter = () => {
@@ -47,6 +47,7 @@ const Shooter = () => {
 				z: 0,
 			},
 			message_type: message_type.action,
+			event_type: event_type.shooter,
 		};
 		socketRef?.current?.send(JSON.stringify(data));
 		setImages((prevImages) => prevImages.slice(1));
