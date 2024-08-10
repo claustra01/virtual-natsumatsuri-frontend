@@ -1,12 +1,6 @@
 .button-style {
     border-width: 0;
   
-    &:hover {
-      &:not([disabled]) {
-        scale: 1.2;
-      }
-    }
-  
     &[data-size="sm"] {
       padding: 4px 8px;
       font-size: 12px;

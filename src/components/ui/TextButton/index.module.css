@@ -1,0 +1,26 @@
+.textButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-decoration: none;
+    outline: none; 
+    font-family: 'Yuji Syuku', serif;
+}
+
+.textButton.sm {
+    font-size: 12px;
+}
+
+.textButton.md {
+    font-size: 16px;
+}
+
+.textButton.lg {
+    font-size: 20px;
+}
+
+.underline {
+    text-decoration: underline;
+}
