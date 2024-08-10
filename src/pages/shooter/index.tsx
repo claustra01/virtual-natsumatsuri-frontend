@@ -4,9 +4,9 @@ import style from "./index.module.css";
 
 function Shooter() {
 	const initialImages = [
-		"/2D_material/kurk.webp",
-		"/2D_material/kurk.webp",
-		"/2D_material/kurk.webp",
+		"/2D_material/cork.webp",
+		"/2D_material/cork.webp",
+		"/2D_material/cork.webp",
 	];
 
 	const [images, setImages] = useState(initialImages);
@@ -31,7 +31,7 @@ function Shooter() {
 					onKeyPress={handleKeyUp}
 				/>
 			</div>
-			<div className={style.kurk}>
+			<div className={style.cork}>
 				{images.map((src) => (
 					<img key={src} src={src} alt="コルクの残量を表示しています" />
 				))}

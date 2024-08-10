@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.kurk {
+.cork {
     display: flex; 
     justify-content: center; 
     gap: 10px; 
@@ -19,7 +19,7 @@
     align-items: center;
 }
 
-.kurk img {
+.cork img {
     width: 72px;
     height: 72px;
 }
