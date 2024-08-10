@@ -1,9 +1,5 @@
 import { Physics, useBox } from "@react-three/cannon";
-import {
-	Canvas,
-	type ThreeElements,
-	useThree,
-} from "@react-three/fiber";
+import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
 import type {
 	BufferGeometry,
 	Material,
