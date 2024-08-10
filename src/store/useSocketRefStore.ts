@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { MutableRefObject } from "react";
+import type { MutableRefObject } from "react";
 
 type State = {
   socketRef: MutableRefObject<WebSocket | undefined> | null;
