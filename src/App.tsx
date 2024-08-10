@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
 	return (
 		<div>
-			<img src={Logo} className="logo" alt="VIRTUAL_NATSUMATSURI_Logo" />
+			<img src="/logo.webp" className="logo" alt="ばーちゃるなつまつりのロゴ" />
 			<h1>VIRTUAL_NATSUMATSURI</h1>
 		</div>
 	);
