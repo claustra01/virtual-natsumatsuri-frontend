@@ -24,7 +24,7 @@ function Home() {
 	}, []);
 
 	const handleClick = () => {
-		window.location.href = isPcScreen ? "/gallery" : "/shooter";
+		window.location.href = isPcScreen ? "/yatai" : "/shooter";
 	};
 
 	return (
