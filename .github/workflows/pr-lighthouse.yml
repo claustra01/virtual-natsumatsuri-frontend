@@ -83,6 +83,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         if: success() && github.event.number && steps.fc.outputs.comment-id != '0'
         with:
+          issue-number: ${{ github.event.number }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
           body: ${{ steps.get-comment-body.outputs.body }}
           edit-mode: replace
