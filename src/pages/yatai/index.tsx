@@ -1,6 +1,9 @@
 import { Physics, useBox } from "@react-three/cannon";
-import { Canvas, MeshProps, type ThreeElements, useThree } from "@react-three/fiber";
-import { useState } from "react";
+import {
+	Canvas,
+	type ThreeElements,
+	useThree,
+} from "@react-three/fiber";
 import type {
 	BufferGeometry,
 	Material,
@@ -8,6 +11,7 @@ import type {
 	NormalBufferAttributes,
 	Object3DEventMap,
 } from "three";
+import { randFloat } from "three/src/math/MathUtils.js";
 import styles from "./index.module.css";
 
 function Yatai() {
@@ -43,13 +47,20 @@ function Yatai() {
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
 		const args: [number, number, number] = [0.7, 2, 0.7];
-		// 一旦ホバーでアクションを起こす
-		const [isActive, setIsActive] = useState<boolean>(false);
-		const [ref] = useBox(() => ({
+		const [ref, api] = useBox(() => ({
 			mass: 1,
 			position: props.position as [number, number, number],
 			args: args,
 		}));
+
+		// 弾が当たった時はこれを呼び出す
+		const handleHit = () => {
+			api.applyImpulse(
+				[randFloat(-2, 2), 4, 8],
+				[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
+			);
+		};
+
 		return (
 			<mesh
 				ref={
@@ -64,10 +75,10 @@ function Yatai() {
 				{...props}
 				castShadow
 				receiveShadow
-				onPointerOver={() => setIsActive(!isActive)}
+				onPointerOver={() => handleHit()}
 			>
 				<boxGeometry args={[...args]} />
-				<meshStandardMaterial color={isActive ? "black" : "yellow"} />
+				<meshStandardMaterial color={"yellow"} />
 			</mesh>
 		);
 	};
