@@ -1,15 +1,15 @@
-import { create } from "zustand";
 import type { MutableRefObject } from "react";
+import { create } from "zustand";
 
 type State = {
-  socketRef: MutableRefObject<WebSocket | undefined> | null;
+	socketRef: MutableRefObject<WebSocket | undefined> | null;
 };
 
 type Action = {
-  setRef: (ref: MutableRefObject<WebSocket | undefined>) => void;
+	setRef: (ref: MutableRefObject<WebSocket | undefined>) => void;
 };
 
 export const useSocketRefStore = create<State & Action>()((set) => ({
-  socketRef: null,
-  setRef: (ref) => set(() => ({ socketRef: ref })),
+	socketRef: null,
+	setRef: (ref) => set(() => ({ socketRef: ref })),
 }));

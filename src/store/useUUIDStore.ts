@@ -3,21 +3,21 @@ import { persist } from "zustand/middleware";
 import { generateUUID } from "../utils/uuid";
 
 type State = {
-  uuid: string;
+	uuid: string;
 };
 
 type Action = {
-  updateUUID: () => void;
+	updateUUID: () => void;
 };
 
 export const useUUIDStore = create<State & Action>()(
-  persist(
-    (set) => ({
-      uuid: generateUUID(),
-      updateUUID: () => set(() => ({ uuid: generateUUID() })),
-    }),
-    {
-      name: "user-uuid",
-    }
-  )
+	persist(
+		(set) => ({
+			uuid: generateUUID(),
+			updateUUID: () => set(() => ({ uuid: generateUUID() })),
+		}),
+		{
+			name: "user-uuid",
+		},
+	),
 );
