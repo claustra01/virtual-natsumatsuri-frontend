@@ -14,8 +14,8 @@ jobs:
         with:
           version: 9
       - run: |
-          npm install
-          npm check:ci
+          pnpm install
+          pnpm check:ci
 
   spell:
     runs-on: ubuntu-latest
