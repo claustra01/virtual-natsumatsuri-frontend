@@ -1,12 +1,15 @@
-name: pr-lighthouse
+name: pull-request
 
 on:
   pull_request:
+    types: [opened, reopened]
 
 permissions:
   pull-requests: write
   contents: read
   checks: write
+  id-token: write
+  pages: write
 
 jobs:
   deploy:
