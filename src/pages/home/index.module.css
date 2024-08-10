@@ -50,7 +50,7 @@ li{
     align-items: center;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1024px) {
     .go-game-pc {
         display: flex;
         justify-content: center;
