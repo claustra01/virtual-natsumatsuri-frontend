@@ -2,10 +2,10 @@
  * 角度・加速度センサーのパーミッションをリクエストする関数
  */
 export const requestPermission = async () => {
-  // @ts-expect-error only safari propaty
+  // @ts-expect-error only safari property
   if (typeof DeviceMotionEvent.requestPermission === "function") {
     try {
-      // @ts-expect-error only safari propaty
+      // @ts-expect-error only safari property
       const permissionState = await DeviceMotionEvent.requestPermission();
       if (permissionState !== "granted") {
         console.warn("Device Motion permission denied.");
@@ -15,11 +15,11 @@ export const requestPermission = async () => {
     }
   }
 
-  // @ts-expect-error only safari propaty
+  // @ts-expect-error only safari property
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
     try {
       const permissionState =
-        // @ts-expect-error only safari propaty
+        // @ts-expect-error only safari property
         await DeviceOrientationEvent.requestPermission();
       if (permissionState !== "granted") {
         console.warn("Device Orientation permission denied.");
