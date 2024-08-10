@@ -1,4 +1,3 @@
-
 import { DefaultButton } from "../../ui/Button";
 import TextButton from "../../ui/TextButton";
 import styles from "./index.module.css";

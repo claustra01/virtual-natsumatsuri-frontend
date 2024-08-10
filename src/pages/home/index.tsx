@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { device } from "../../utils/device";
 import HomePC from "../../components/responsive/homePC";
 import HomeSP from "../../components/responsive/homeSP";
-
+import { device } from "../../utils/device";
 
 function Home() {
 	const [isPcScreen, setIsPcScreen] = useState(
