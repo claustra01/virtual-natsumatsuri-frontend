@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HomePC from "../../components/responsive/homePC";
+import HomeSP from "../../components/responsive/homeSP";
 import { DefaultButton } from "../../components/ui/Button";
 import { useSocketRefStore } from "../../store";
 import { device } from "../../utils/device";
 import { requestPermission } from "../../utils/permission";
-import HomePC from "../../components/responsive/homePC";
-import HomeSP from "../../components/responsive/homeSP";
 import styles from "./index.module.css";
 
 function Home() {
@@ -30,7 +30,6 @@ function Home() {
 	}, []);
 
 	return isPcScreen ? <HomePC /> : <HomeSP />;
-
 }
 
 export default Home;
