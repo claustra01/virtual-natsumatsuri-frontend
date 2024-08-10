@@ -1,21 +1,37 @@
 import { Physics, useBox } from "@react-three/cannon";
-import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
+import { Canvas, MeshProps, type ThreeElements, useThree } from "@react-three/fiber";
 import { useState } from "react";
-import {
-	type BufferGeometry,
-	type Material,
-	type Mesh,
-	type NormalBufferAttributes,
-	type Object3DEventMap,
-	Vector3,
+import type {
+	BufferGeometry,
+	Material,
+	Mesh,
+	NormalBufferAttributes,
+	Object3DEventMap,
 } from "three";
 import styles from "./index.module.css";
 
 function Yatai() {
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
+		const [ref] = useBox(() => ({
+			mass: 0,
+			position: props.position as [number, number, number],
+		}));
 		return (
-			<mesh {...props} castShadow receiveShadow>
+			<mesh
+				ref={
+					ref as React.Ref<
+						Mesh<
+							BufferGeometry<NormalBufferAttributes>,
+							Material | Material[],
+							Object3DEventMap
+						>
+					>
+				}
+				{...props}
+				castShadow
+				receiveShadow
+			>
 				<boxGeometry args={[10, 2, 2]} />
 				<meshStandardMaterial color={"red"} />
 			</mesh>
@@ -28,10 +44,7 @@ function Yatai() {
 		const [isActive, setIsActive] = useState<boolean>(false);
 		const [ref] = useBox(() => ({
 			mass: 1,
-			position:
-				props.position instanceof Vector3
-					? props.position.toArray()
-					: new Vector3().toArray(),
+			position: props.position as [number, number, number],
 		}));
 		return (
 			<mesh
