@@ -13,9 +13,11 @@ import styles from "./index.module.css";
 function Yatai() {
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
+		const args: [number, number, number] = [10, 2, 2];
 		const [ref] = useBox(() => ({
 			mass: 0,
 			position: props.position as [number, number, number],
+			args: args,
 		}));
 		return (
 			<mesh
@@ -32,7 +34,7 @@ function Yatai() {
 				castShadow
 				receiveShadow
 			>
-				<boxGeometry args={[10, 2, 2]} />
+				<boxGeometry args={[...args]} />
 				<meshStandardMaterial color={"red"} />
 			</mesh>
 		);
@@ -40,11 +42,13 @@ function Yatai() {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
+		const args: [number, number, number] = [0.7, 2, 0.7];
 		// 一旦ホバーでアクションを起こす
 		const [isActive, setIsActive] = useState<boolean>(false);
 		const [ref] = useBox(() => ({
 			mass: 1,
 			position: props.position as [number, number, number],
+			args: args,
 		}));
 		return (
 			<mesh
@@ -62,7 +66,7 @@ function Yatai() {
 				receiveShadow
 				onPointerOver={() => setIsActive(!isActive)}
 			>
-				<boxGeometry args={[0.7, 2, 0.7]} />
+				<boxGeometry args={[...args]} />
 				<meshStandardMaterial color={isActive ? "black" : "yellow"} />
 			</mesh>
 		);
