@@ -25,3 +25,35 @@
     .scroll-infinity__item>img {
       width: 100%;
     }
+
+.background-logo{
+    opacity: 0.8;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+}
+
+li{
+    font-size: 20px;
+    padding: 0 24px;
+}
+
+.go-game{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .go-game-pc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
