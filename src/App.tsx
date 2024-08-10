@@ -1,13 +1,14 @@
-import Logo from "../public/logo.webp";
-import "./App.css";
-
-function App() {
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/home";
+const AppRoutes = () => {
 	return (
-		<div>
-			<img src={Logo} className="logo" alt="VIRTUAL_NATSUMATSURI_Logo" />
-			<h1>VIRTUAL_NATSUMATSURI</h1>
-		</div>
+		<>
+			<Routes>
+				<Route path="/" />
+				<Route path="/home" element={<Home />} />
+			</Routes>
+		</>
 	);
-}
+};
 
-export default App;
+export default AppRoutes;
