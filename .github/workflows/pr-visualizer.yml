@@ -2,8 +2,6 @@ name: pr-visualizer
 
 on:
   pull_request:
-    types: [opened]
-  workflow_dispatch:
 
 permissions:
   pull-requests: write
