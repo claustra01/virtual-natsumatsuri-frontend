@@ -1,7 +1,33 @@
+import { useEffect, useState } from "react";
 import { DefaultButton } from "../../components/ui/Button";
 import styles from "./index.module.css";
 
 function Home() {
+	const [isSmallScreen, setIsSmallScreen] = useState(
+		window.matchMedia("(max-width: 600px)").matches,
+	);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(max-width: 600px)");
+
+		const handleChange = (event: {
+			matches: boolean | ((prevState: boolean) => boolean);
+		}) => {
+			setIsSmallScreen(event.matches);
+		};
+
+		mediaQuery.addEventListener("change", handleChange);
+
+		// Cleanup event listener on component unmount
+		return () => {
+			mediaQuery.removeEventListener("change", handleChange);
+		};
+	}, []);
+
+	const handleClick = () => {
+		window.location.href = isSmallScreen ? "/shooter" : "/gallery";
+	};
+
 	return (
 		<div>
 			<div className={styles["scroll-infinity"]}>
@@ -29,8 +55,10 @@ function Home() {
 					height="350"
 				/>
 			</div>
-			<div className={styles["go-game"]}>
-				<DefaultButton color="red" size="lg">
+			<div
+				className={`${styles["go-game"]} ${isSmallScreen ? styles["go-game-pc"] : ""}`}
+			>
+				<DefaultButton color="red" size="lg" onClick={handleClick}>
 					射的へ向かう
 				</DefaultButton>
 			</div>

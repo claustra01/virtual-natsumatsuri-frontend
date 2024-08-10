@@ -41,11 +41,19 @@ li{
     padding: 0 24px;
 }
 
-.go_game{
+.go-game{
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 600px) {
+    .go-game-pc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
