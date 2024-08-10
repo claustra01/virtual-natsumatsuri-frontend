@@ -1,5 +1,6 @@
-import { DefaultButton } from "../../components/ui/Button";
-import TextButton from "../../components/ui/TextButton";
+
+import { DefaultButton } from "../../ui/Button";
+import TextButton from "../../ui/TextButton";
 import styles from "./index.module.css";
 
 function HomePC() {

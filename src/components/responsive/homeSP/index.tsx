@@ -1,4 +1,4 @@
-import { DefaultButton } from "../../components/ui/Button";
+import { DefaultButton } from "../../ui/Button";
 import styles from "./index.module.css";
 
 function HomeSP() {
