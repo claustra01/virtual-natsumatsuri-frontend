@@ -1,6 +1,7 @@
 import { Physics, useBox } from "@react-three/cannon";
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
 import { useEffect, useState } from "react";
+import React from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -16,8 +17,6 @@ import {
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
-import React from "react";
-
 
 const YataiStage = React.memo(() => {
 	// 土台
@@ -124,7 +123,6 @@ const YataiStage = React.memo(() => {
 		</div>
 	);
 });
-
 
 function Yatai() {
 	const socketRef = useSocketRefStore((state) => state.socketRef);
