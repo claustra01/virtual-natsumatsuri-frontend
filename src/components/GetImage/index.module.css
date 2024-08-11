@@ -1,0 +1,12 @@
+.centered-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; 
+}
+
+.centered-image img {
+    max-width: 40%; 
+    height: auto;   
+    border-radius: 10px; 
+}
