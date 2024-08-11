@@ -10,7 +10,12 @@ import type {
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
-import { MessageType, type ActionSchema, type PointerSchema, type Target } from "../../type/shooting";
+import {
+	type ActionSchema,
+	MessageType,
+	type PointerSchema,
+	type Target,
+} from "../../type/shooting";
 import styles from "./index.module.css";
 
 function Yatai() {
@@ -37,8 +42,8 @@ function Yatai() {
 	// TODO: これらは一人用,いつかマルチプレイヤー対応する
 	const [aim, setAim] = useState<Target | undefined>(undefined);
 	const aimTarget = (data: PointerSchema) => {
-		let x = window.innerWidth / 2 * data.target.x - window.innerWidth / 2;
-		let y = window.innerHeight / 2 * data.target.y - window.innerHeight / 2;
+		const x = (window.innerWidth / 2) * data.target.x - window.innerWidth / 2;
+		const y = (window.innerHeight / 2) * data.target.y - window.innerHeight / 2;
 		setAim({ x, y });
 	};
 
