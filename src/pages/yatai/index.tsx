@@ -1,7 +1,6 @@
 import { Physics, useBox } from "@react-three/cannon";
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
-import { useEffect, useState } from "react";
-import React from "react";
+import { memo, useEffect, useState } from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -18,7 +17,7 @@ import {
 } from "../../type/shooting";
 import styles from "./index.module.css";
 
-const YataiStage = React.memo(() => {
+const YataiStage = memo(() => {
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
 		const args: [number, number, number] = [10, 2, 2];
