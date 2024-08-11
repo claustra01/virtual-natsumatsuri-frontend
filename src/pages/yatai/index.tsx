@@ -49,10 +49,12 @@ const YataiStage = memo(() => {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
+		const position = props.position as [number, number, number];
+
 		const args: [number, number, number] = [0.7, 2, 0.7];
 		const [ref, api] = useBox(() => ({
 			mass: 1,
-			position: props.position as [number, number, number],
+			position: position,
 			args: args,
 		}));
 
@@ -81,21 +83,17 @@ const YataiStage = memo(() => {
 		useEffect(() => {
 			if (!target) return;
 			if (
-				target.x * 2 >
-					(props.position as [number, number, number])[0] - args[0] / 2 &&
-				target.x * 2 <
-					(props.position as [number, number, number])[0] + args[0] / 2 &&
-				target.y * 2 >
-					(props.position as [number, number, number])[1] - args[1] / 2 - 2 &&
-				target.y * 2 <
-					(props.position as [number, number, number])[1] + args[1] / 2 - 2
+				target.x * 2 > position[0] - args[0] / 2 &&
+				target.x * 2 < position[0] + args[0] / 2 &&
+				target.y * 2 > position[1] - args[1] / 2 - 2 &&
+				target.y * 2 < position[1] + args[1] / 2 - 2
 			) {
 				api.applyImpulse(
 					[randFloat(-2, 2), 4, 8],
 					[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
 				);
 			}
-		}, [target, props.position, api]);
+		}, [target, position, api]);
 
 		return (
 			<mesh
