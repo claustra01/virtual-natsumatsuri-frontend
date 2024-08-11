@@ -81,17 +81,21 @@ const YataiStage = memo(() => {
 		useEffect(() => {
 			if (!target) return;
 			if (
-				target.x * 2 > (props.position as [number, number, number])[0] - args[0]/2 &&
-				target.x * 2 < (props.position as [number, number, number])[0] + args[0]/2 &&
-				target.y * 2 > (props.position as [number, number, number])[1] - args[1]/2 - 2 &&
-				target.y * 2 < (props.position as [number, number, number])[1] + args[1]/2 - 2
+				target.x * 2 >
+					(props.position as [number, number, number])[0] - args[0] / 2 &&
+				target.x * 2 <
+					(props.position as [number, number, number])[0] + args[0] / 2 &&
+				target.y * 2 >
+					(props.position as [number, number, number])[1] - args[1] / 2 - 2 &&
+				target.y * 2 <
+					(props.position as [number, number, number])[1] + args[1] / 2 - 2
 			) {
 				api.applyImpulse(
 					[randFloat(-2, 2), 4, 8],
 					[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
 				);
 			}
-		}, [target]);
+		}, [target, props.position, api]);
 
 		return (
 			<mesh
