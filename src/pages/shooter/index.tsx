@@ -2,10 +2,15 @@ import { type KeyboardEventHandler, useState } from "react";
 import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
+import { useOrientation } from "../../hooks/useOrientation";
+import { useSocketRefStore, useUUIDStore } from "../../store";
+import { type Schema, event_type, message_type } from "../../type/schema";
 import style from "./index.module.css";
 
-function Shooter() {
+const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
+	const { orientationDiff } = useOrientation();
+	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	const initialImages = [
 		"/2D_material/cork.webp",
@@ -14,18 +19,38 @@ function Shooter() {
 	];
 
 	const [images, setImages] = useState(initialImages);
+	const uuid = useUUIDStore((state) => state.uuid);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
 		audio
 			.play()
-			.then(() => {
-				setImages((prevImages) => prevImages.slice(1));
-			})
+			.then(() => {})
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
-				setImages((prevImages) => prevImages.slice(1));
 			});
+		const data: Schema = {
+			id: uuid,
+			interval: 0,
+			angle: {
+				x: orientationDiff.beta,
+				y: orientationDiff.gamma,
+			},
+			acceleration: {
+				x: 0,
+				y: 0,
+				z: 0,
+			},
+			distance: {
+				x: 0,
+				y: 0,
+				z: 0,
+			},
+			message_type: message_type.action,
+			event_type: event_type.shooter,
+		};
+		socketRef?.current?.send(JSON.stringify(data));
+		setImages((prevImages) => prevImages.slice(1));
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -43,19 +68,21 @@ function Shooter() {
 				<ShooterButton onClick={handleClick} onKeyUp={handleKeyUp} />
 			</div>
 			<div className={style.cork}>
-				{images.map((src) => (
-					<img key={src} src={src} alt="コルクの残量を表示しています" />
+				{images.map((src, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					<img key={i} src={src} alt="コルクの残量を表示しています" />
 				))}
 			</div>
 		</div>
 	);
-}
+};
 
 type ModalContentProps = {
 	setIsOpen: (isOpen: boolean) => void;
 };
 
 const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
+	const { reset } = useOrientation();
 	return (
 		<div className={style["modal-wrapper"]}>
 			<img
@@ -76,7 +103,10 @@ const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
 					variant="outlined"
 					color="red"
 					size="md"
-					onClick={() => setIsOpen(false)}
+					onClick={() => {
+						reset();
+						setIsOpen(false);
+					}}
 				>
 					置いたよ！
 				</DefaultButton>

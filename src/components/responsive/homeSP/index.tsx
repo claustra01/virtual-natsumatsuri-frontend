@@ -1,20 +1,29 @@
+import { useNavigate } from "react-router-dom";
+import { useSocketRefStore } from "../../../store";
+import { requestPermission } from "../../../utils/permission";
 import { DefaultButton } from "../../ui/Button";
 import styles from "./index.module.css";
 
 function HomeSP() {
+	const navigate = useNavigate();
+	const setRef = useSocketRefStore((state) => state.setRef);
+
 	const handleClick = () => {
+		requestPermission();
+		const socketRef = new WebSocket(
+			`wss://${import.meta.env.VITE_HOST_NAME || "virtual-natsumatsuri-3jpy6th4da-an.a.run.app"}/ws?room_id=2`,
+		);
+		setRef({ current: socketRef });
 		const audio = new Audio("/sound/wadaiko.mp3");
 		audio
 			.play()
 			.then(() => {
-				setTimeout(() => {
-					window.location.href = "/shooter";
-				}, 500);
+				setTimeout(() => {}, 500);
 			})
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
-				window.location.href = "/shooter";
 			});
+		navigate("/shooter");
 	};
 
 	return (

@@ -5,6 +5,7 @@ export interface Schema {
 	acceleration: acceleration;
 	distance: distance;
 	message_type: message_type;
+	event_type: event_type;
 }
 
 interface angle {
@@ -27,4 +28,10 @@ interface distance {
 export enum message_type {
 	pointer = "pointer",
 	action = "action",
+}
+
+export enum event_type {
+	shooter = "shooter",
+	ringToss = "ring_toss",
+	fireFlower = "fire_flower",
 }
