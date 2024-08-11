@@ -181,17 +181,14 @@ const TargetOverlay = () => {
 	// 	setAim({ x, y });
 	// };
 
-	const [target, setTarget] = useState<Target | undefined>(undefined);
+	// const [target, setTarget] = useState<Target | undefined>(undefined);
 	const shotTarget = (data: ActionSchema) => {
 		const x = window.innerWidth / 2 + data.target.x * 300;
 		const y = window.innerHeight / 2 + data.target.y * 300;
 		// TODO: エイム実装ができたらここのsetAimは削除する
 		setAim({ x, y });
-		setTarget({ x, y });
+		// setTarget({ x, y });
 	};
-
-	// DEBUG: 後で消す
-	console.log(target);
 
 	return (
 		<div
