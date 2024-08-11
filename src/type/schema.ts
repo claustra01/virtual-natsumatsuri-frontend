@@ -26,7 +26,7 @@ interface distance {
 }
 
 export enum message_type {
-	pointer = "pointer",
+	status = "status",
 	action = "action",
 }
 
