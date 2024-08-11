@@ -5,9 +5,9 @@ import { copyStringToClipboard } from "../../../utils/copyClipBoard";
 import { requestPermission } from "../../../utils/permission";
 import QRCodeGenerator from "../../QRCodeGenerator";
 import { DefaultButton } from "../../ui/Button";
+import Rule from "../../ui/Rule";
 import TextButton from "../../ui/TextButton";
 import styles from "./index.module.css";
-import Rule from "../../ui/Rule";
 
 function HomePC() {
 	const navigate = useNavigate();
@@ -62,7 +62,7 @@ function HomePC() {
 					</ul>
 				</div>
 			</div>
-	
+
 			<div className={styles["left-container"]}>
 				<div className={styles["background-logo"]}>
 					<img src="/logo.webp" alt="背景にばーちゃるなつまつりのロゴ" />

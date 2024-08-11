@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSocketRefStore } from "../../../store";
 import { requestPermission } from "../../../utils/permission";
 import { DefaultButton } from "../../ui/Button";
-import styles from "./index.module.css";
 import Rule from "../../ui/Rule";
+import styles from "./index.module.css";
 
 function HomeSP() {
 	const navigate = useNavigate();
@@ -14,8 +14,9 @@ function HomeSP() {
 		const params = new URLSearchParams(location.search);
 		const roomId = params.get("room_id");
 		const socketRef = new WebSocket(
-			`wss://${import.meta.env.VITE_HOST_NAME ||
-			"virtual-natsumatsuri-3jpy6th4da-an.a.run.app"
+			`wss://${
+				import.meta.env.VITE_HOST_NAME ||
+				"virtual-natsumatsuri-3jpy6th4da-an.a.run.app"
 			}/ws?room_id=${roomId}`,
 		);
 		setRef({ current: socketRef });
@@ -23,7 +24,7 @@ function HomeSP() {
 		audio
 			.play()
 			.then(() => {
-				setTimeout(() => { }, 500);
+				setTimeout(() => {}, 500);
 			})
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
