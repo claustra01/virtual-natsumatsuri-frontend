@@ -1,6 +1,6 @@
 import { Physics, useBox } from "@react-three/cannon";
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -10,6 +10,7 @@ import type {
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
+import type { ActionSchema, PointerSchema, Target } from "../../type/shooting";
 import styles from "./index.module.css";
 
 function Yatai() {
@@ -18,8 +19,13 @@ function Yatai() {
 	useEffect(() => {
 		const onMessage = (event: MessageEvent) => {
 			const data = JSON.parse(event.data);
-			// サーバーから受け取ったデータを使って処理をする
-			console.log(data);
+			// サーバーから受け取ったデータを使った処理
+			if (data.event_type === "pointer") {
+				aimTarget(data);
+			}
+			if (data.event_type === "action") {
+				shotTarget(data);
+			}
 		};
 		const currentSocketRef = socketRef?.current;
 		currentSocketRef?.addEventListener("message", onMessage);
@@ -27,6 +33,17 @@ function Yatai() {
 			currentSocketRef?.removeEventListener("message", onMessage);
 		};
 	}, [socketRef]);
+
+	// TODO: これらは一人用,いつかマルチプレイヤー対応する
+	const [aim, setAim] = useState<Target | undefined>(undefined);
+	const aimTarget = (data: PointerSchema) => {
+		setAim(data.target);
+	};
+
+	const [target, setTarget] = useState<Target | undefined>(undefined);
+	const shotTarget = (data: ActionSchema) => {
+		setTarget(data.target);
+	}
 
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
