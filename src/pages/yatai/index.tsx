@@ -56,13 +56,42 @@ const YataiStage = memo(() => {
 			args: args,
 		}));
 
-		// 弾が当たった時はこれを呼び出す
-		const handleHit = () => {
-			api.applyImpulse(
-				[randFloat(-2, 2), 4, 8],
-				[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
-			);
+		const socketRef = useSocketRefStore((state) => state.socketRef);
+
+		useEffect(() => {
+			const onMessage = (event: MessageEvent) => {
+				const data = JSON.parse(event.data);
+				if (data.message_type === MessageType.Action) {
+					shotTarget(data);
+				}
+			};
+			const currentSocketRef = socketRef?.current;
+			currentSocketRef?.addEventListener("message", onMessage);
+			return () => {
+				currentSocketRef?.removeEventListener("message", onMessage);
+			};
+		}, [socketRef]);
+
+		// TODO: これらは一人用,いつかマルチプレイヤー対応する
+		const [target, setTarget] = useState<Target | undefined>(undefined);
+		const shotTarget = (data: ActionSchema) => {
+			setTarget({ x: data.target.x, y: data.target.y });
 		};
+
+		useEffect(() => {
+			if (!target) return;
+			if (
+				target.x * 2 > (props.position as [number, number, number])[0] - args[0]/2 &&
+				target.x * 2 < (props.position as [number, number, number])[0] + args[0]/2 &&
+				target.y * 2 > (props.position as [number, number, number])[1] - args[1]/2 - 2 &&
+				target.y * 2 < (props.position as [number, number, number])[1] + args[1]/2 - 2
+			) {
+				api.applyImpulse(
+					[randFloat(-2, 2), 4, 8],
+					[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
+				);
+			}
+		}, [target]);
 
 		return (
 			<mesh
@@ -78,7 +107,6 @@ const YataiStage = memo(() => {
 				{...props}
 				castShadow
 				receiveShadow
-				onPointerOver={() => handleHit()}
 			>
 				<boxGeometry args={[...args]} />
 				<meshStandardMaterial color={"yellow"} />
