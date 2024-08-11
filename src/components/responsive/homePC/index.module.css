@@ -1,113 +1,171 @@
 @keyframes infinity-scroll-left {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.scroll-infinity {
+  position: absolute;
+  display: flex;
+  z-index: 100;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .scroll-infinity__wrap {
-    display: flex;
-    overflow: hidden;
-    width: 100vw;
+  overflow: hidden;
 }
 
 .scroll-infinity__list {
-    display: flex;
-    list-style: none;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  padding: 0;
 }
 
 .scroll-infinity__list--left {
-    animation: infinity-scroll-left 60s infinite linear 0.5s both;
+  animation: infinity-scroll-left 60s infinite linear 0.5s both;
 }
 
 .scroll-infinity__item {
-    width: 33.33vw; 
+  width: 33.33vw;
 }
 
 .scroll-infinity__item > img {
-    width: 100%;
+  width: 100%;
 }
 
 .background-logo {
-    opacity: 0.2;
-    position: absolute;
-    top: 50%;
-    left: 24%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    max-width: 48%; 
+  opacity: 0.2;
+  position: absolute;
+  top: 50%;
+  left: 24%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  max-width: 48%;
+}
+.background-logo img {
+  height: 100vh;
+  aspect-ratio: 1 / 1;
 }
 
 li {
-    font-size: 40px; 
-    padding: 0 32px;
+  font-size: 40px;
+  padding: 0 32px;
 }
 
 .go-game-pc {
-    position: absolute;
-    top: 80%;
-    left: 24%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    width: 40%; 
-    text-align: center;
-    z-index: 10;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  text-align: center;
+  z-index: 10;
 }
 
 .go-game-pc button {
-    width: 100%;
-    padding: 16px 0;
-    font-size: 24px; 
+  width: 100%;
+  padding: 16px 0;
+  font-size: 24px;
 }
 
-.red-lite{
-    opacity: 0.8;
-    position: absolute;
-    top: 2%;
-    right: 0;
+.red-lite {
+  opacity: 0.8;
+  position: absolute;
+  top: 2%;
+  width: 500px;
+  height: 500px;
+  right: 0;
+  z-index: -1;
 }
 
-.pistol-img{
-    opacity: 0.2;
-    position: absolute;
-    top: 25%;
-    right: 8%;
-    transform: scale(-1, 1);
+.pistol-img {
+  opacity: 0.2;
+  position: absolute;
+  top: 25%;
+  right: 8%;
+  transform: scale(-1, 1);
 }
 
 .overlay-square {
-    position: absolute;
-    top: 20%;
-    right: 120px;
-    width: 520px; 
-    height: 532px; 
-    background-color: rgba(255, 255, 255, 0.8); 
-    z-index: 1; 
+  position: absolute;
+  top: 20%;
+  right: 120px;
+  width: 520px;
+  height: 532px;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
 }
 
-.id-room{
-    position: absolute;
-    top: 20%;
-    right: 300px;
-    font-size: 32px;
-    z-index: 10; 
+.qr-scan {
+  position: absolute;
+  bottom: 10%;
+  right: -50px;
+  z-index: 10;
 }
 
-.qr-scan{
-    position: absolute;
-    top: 60%;
-    right: -10px;
-    z-index: 10; 
+.link-copy {
+  margin: 50px;
+  z-index: 10;
 }
 
-.link-copy{
-    position: absolute;
-    top: 80%;
-    right: 300px;
-    z-index: 10;
+.content-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.left-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+.right-container {
+  display: flex;
+  width: 50%;
+  height: 100%;
+}
+
+.qr-wrapper {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  aspect-ratio: 520 / 532;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+.qr-wrapper svg {
+  width: 80%;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.yatai-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.id-room {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  z-index: 10;
 }
