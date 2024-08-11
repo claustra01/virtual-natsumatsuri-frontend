@@ -39,6 +39,7 @@
 
 .background-logo {
   opacity: 0.1;
+
   position: absolute;
   top: 50%;
   left: 24%;
@@ -178,7 +179,4 @@ li {
   height: 30%;
   background-color: #fff;
   opacity: 0.4;
-}
-.ready{
-  font-size: 24px;
 }

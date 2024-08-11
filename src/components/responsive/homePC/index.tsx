@@ -62,7 +62,6 @@ function HomePC() {
 					</ul>
 				</div>
 			</div>
-
 			<div className={styles["left-container"]}>
 				<div className={styles["background-logo"]}>
 					<img src="/logo.webp" alt="背景にばーちゃるなつまつりのロゴ" />
@@ -77,6 +76,7 @@ function HomePC() {
 						射的へ向かう
 					</DefaultButton>
 				</div>
+
 				<div className={styles.text}>
 					<Rule />
 				</div>
