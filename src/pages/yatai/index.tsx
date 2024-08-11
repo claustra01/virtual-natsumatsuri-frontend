@@ -10,7 +10,7 @@ import type {
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
-import type { ActionSchema, PointerSchema, Target } from "../../type/shooting";
+import { MessageType, type ActionSchema, type PointerSchema, type Target } from "../../type/shooting";
 import styles from "./index.module.css";
 
 function Yatai() {
@@ -20,10 +20,10 @@ function Yatai() {
 		const onMessage = (event: MessageEvent) => {
 			const data = JSON.parse(event.data);
 			// サーバーから受け取ったデータを使った処理
-			if (data.event_type === "pointer") {
+			if (data.message_type === MessageType.Pointer) {
 				aimTarget(data);
 			}
-			if (data.event_type === "action") {
+			if (data.message_type === MessageType.Action) {
 				shotTarget(data);
 			}
 		};
@@ -37,7 +37,9 @@ function Yatai() {
 	// TODO: これらは一人用,いつかマルチプレイヤー対応する
 	const [aim, setAim] = useState<Target | undefined>(undefined);
 	const aimTarget = (data: PointerSchema) => {
-		setAim(data.target);
+		let x = window.innerWidth / 2 * data.target.x - window.innerWidth / 2;
+		let y = window.innerHeight / 2 * data.target.y - window.innerHeight / 2;
+		setAim({ x, y });
 	};
 
 	const [target, setTarget] = useState<Target | undefined>(undefined);

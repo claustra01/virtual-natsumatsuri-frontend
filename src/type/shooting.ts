@@ -1,4 +1,4 @@
-export enum EventType {
+export enum MessageType {
 	Pointer = "pointer",
 	Action = "action",
 }
@@ -16,13 +16,13 @@ export interface Vector {
 
 export interface PointerSchema {
 	id: string;
-	event_type: EventType.Pointer;
+	message_type: MessageType.Pointer;
 	target: Target;
 }
 
 export interface ActionSchema {
 	id: string;
-	event_type: EventType.Action;
+	message_type: MessageType.Action;
 	target: Target;
 	vector: Vector;
 }
