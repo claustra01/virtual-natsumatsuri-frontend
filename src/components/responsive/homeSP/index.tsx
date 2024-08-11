@@ -3,6 +3,7 @@ import { useSocketRefStore } from "../../../store";
 import { requestPermission } from "../../../utils/permission";
 import { DefaultButton } from "../../ui/Button";
 import styles from "./index.module.css";
+import Rule from "../../ui/Rule";
 
 function HomeSP() {
 	const navigate = useNavigate();
@@ -59,6 +60,7 @@ function HomeSP() {
 						射的へ向かう
 					</DefaultButton>
 				</div>
+				<Rule/>
 			</div>
 		</div>
 	);
