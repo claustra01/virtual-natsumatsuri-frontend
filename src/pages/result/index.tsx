@@ -20,7 +20,8 @@ function Result() {
 					images={images}
 					alt="ランダムに表示されるボトル画像"
 					width={160}
-					height={160} />
+					height={160}
+				/>
 			</div>
 			<div className={styles["background-logo"]}>
 				<img
@@ -33,7 +34,7 @@ function Result() {
 			<div className={styles["get-text"]}>
 				<p>Bottle Get!</p>
 			</div>
-			<div className={styles['share-btn']}>
+			<div className={styles["share-btn"]}>
 				<a
 					href="https://twitter.com/intent/tweet?text=Webの射的で遊んだよ.%20%23virtualnatsumatsuri%20%23炎上開発%20%23鹿児島ハッカソン"
 					target="_blank"
@@ -44,7 +45,7 @@ function Result() {
 					</DefaultButton>
 				</a>
 			</div>
-			<div className={styles['replay-text']}>
+			<div className={styles["replay-text"]}>
 				<p>また遊びにきてや〜</p>
 			</div>
 		</div>
