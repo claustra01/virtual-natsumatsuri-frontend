@@ -32,8 +32,8 @@ const Shooter = () => {
 				id: uuid,
 				interval: 0,
 				angle: {
-					x: orientationDiff.beta,
-					y: orientationDiff.gamma,
+					x: -orientationDiff.alpha,
+					y: -orientationDiff.beta,
 				},
 				acceleration: {
 					x: 0,
