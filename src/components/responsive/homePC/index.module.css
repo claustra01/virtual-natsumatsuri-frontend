@@ -120,7 +120,6 @@ li {
 }
 
 .go-game-pc {
-  margin-left: 15%;
   z-index: 10;
 }
 
@@ -129,10 +128,11 @@ li {
   position: relative;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  aspect-ratio: 520 / 532;
+  width: 68%;
+  aspect-ratio: 520 / 560;
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
+  margin-top: 80px;
 }
 
 .qr-wrapper svg {

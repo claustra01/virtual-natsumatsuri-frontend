@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRoomIdStore, useSocketRefStore } from "../../../store";
 import { copyStringToClipboard } from "../../../utils/copyClipBoard";
@@ -12,6 +13,13 @@ function HomePC() {
 	const setRef = useSocketRefStore((state) => state.setRef);
 	const roomId = useRoomIdStore((state) => state.uuid);
 	const url = `${window.location.href}?room_id=${roomId}`;
+	const [buttonText, setButtonText] = useState("共有リンクをコピー");
+
+	const handleCopyClick = () => {
+		copyStringToClipboard(url);
+		setButtonText("コピーしました");
+		setTimeout(() => setButtonText("共有リンクをコピー"), 2000);
+	};
 
 	const handleClick = () => {
 		requestPermission();
@@ -86,11 +94,11 @@ function HomePC() {
 					</div>
 					<div className={styles["link-copy"]}>
 						<TextButton
-							text="共有リンクをコピー"
+							text={buttonText}
 							color="black"
 							size="md"
 							type="button"
-							onClick={() => copyStringToClipboard(url)}
+							onClick={handleCopyClick}
 							underline={true}
 						/>
 					</div>
