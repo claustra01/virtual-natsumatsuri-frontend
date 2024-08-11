@@ -12,8 +12,8 @@ import type {
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
 import {
+	ActionSchema,
 	MessageType,
-	type PointerSchema,
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
@@ -132,10 +132,10 @@ const TargetOverlay = () => {
 			const data = JSON.parse(event.data);
 			// サーバーから受け取ったデータを使った処理
 			if (data.message_type === MessageType.Pointer) {
-				aimTarget(data);
+				// aimTarget(data);
 			}
 			if (data.message_type === MessageType.Action) {
-				// shotTarget(data);
+				shotTarget(data);
 			}
 		};
 		const currentSocketRef = socketRef?.current;
@@ -147,16 +147,24 @@ const TargetOverlay = () => {
 
 	// TODO: これらは一人用,いつかマルチプレイヤー対応する
 	const [aim, setAim] = useState<Target | undefined>(undefined);
-	const aimTarget = (data: PointerSchema) => {
-		const x = (window.innerWidth / 2) * data.target.x + window.innerWidth / 2;
-		const y = (window.innerHeight / 2) * data.target.y + window.innerHeight / 2;
+	// TODO: エイム照準の実装
+	// const aimTarget = (data: PointerSchema) => {
+	// 	const x = window.innerWidth * data.target.x + window.innerWidth / 2;
+	// 	const y = window.innerHeight * data.target.y + window.innerHeight / 2;
+	// 	setAim({ x, y });
+	// };
+
+	const [target, setTarget] = useState<Target | undefined>(undefined);
+	const shotTarget = (data: ActionSchema) => {
+		const x = window.innerWidth / 2 + data.target.x * 300;
+		const y = window.innerHeight / 2 + data.target.y * 300;
+		// TODO: エイム実装ができたらここのsetAimは削除する
 		setAim({ x, y });
+		setTarget({ x, y });
 	};
 
-	// const [target, setTarget] = useState<Target | undefined>(undefined);
-	// const shotTarget = (data: ActionSchema) => {
-	// 	setTarget(data.target);
-	// };
+	// DEBUG: 後で消す
+	console.log(target);
 
 	return (
 		<div
