@@ -12,7 +12,7 @@ import type {
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
 import {
-	ActionSchema,
+	type ActionSchema,
 	MessageType,
 	type Target,
 } from "../../type/shooting";
