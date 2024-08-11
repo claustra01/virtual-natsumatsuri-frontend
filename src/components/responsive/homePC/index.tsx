@@ -55,15 +55,15 @@ function HomePC() {
 			</div>
 			<div className={styles["left-container"]}>
 				<div className={styles["background-logo"]}>
-					<img
-						src="/logo.webp"
-						alt="背景にばーちゃるなつまつりのロゴ"
-						// width="680"
-						// height="680"
-					/>
+					<img src="/logo.webp" alt="背景にばーちゃるなつまつりのロゴ" />
 				</div>
 				<div className={styles["go-game-pc"]}>
-					<DefaultButton color="red" size="lg" onClick={handleClick}>
+					<DefaultButton
+						variant="outlined"
+						color="red"
+						size="lg"
+						onClick={handleClick}
+					>
 						射的へ向かう
 					</DefaultButton>
 				</div>
@@ -80,13 +80,16 @@ function HomePC() {
 						<img
 							src="/2D_material/scan.webp"
 							alt="qr-scan"
-							width="200"
-							height="200"
+							width="160"
+							height="160"
 						/>
 					</div>
 					<div className={styles["link-copy"]}>
 						<TextButton
 							text="共有リンクをコピー"
+							color="black"
+							size="md"
+							type="button"
 							onClick={() => copyStringToClipboard(url)}
 							underline={true}
 						/>
@@ -94,12 +97,7 @@ function HomePC() {
 				</div>
 			</div>
 			<div className={styles["red-lite"]}>
-				<img
-					src="/2D_material/red_lite.webp"
-					alt="赤提灯"
-					// width="500"
-					// height="500"
-				/>
+				<img src="/2D_material/red_lite.webp" alt="赤提灯" />
 			</div>
 			<div className={styles["pistol-img"]}>
 				<img

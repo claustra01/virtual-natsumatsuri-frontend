@@ -48,7 +48,7 @@
   max-width: 48%;
 }
 .background-logo img {
-  height: 100vh;
+  height: 90vh;
   aspect-ratio: 1 / 1;
 }
 
@@ -57,26 +57,12 @@ li {
   padding: 0 32px;
 }
 
-.go-game-pc {
-  justify-content: center;
-  align-items: center;
-  width: 40%;
-  text-align: center;
-  z-index: 10;
-}
-
-.go-game-pc button {
-  width: 100%;
-  padding: 16px 0;
-  font-size: 24px;
-}
-
 .red-lite {
   opacity: 0.8;
   position: absolute;
   top: 2%;
-  width: 500px;
-  height: 500px;
+  width: 200px;
+  height: 200px;
   right: 0;
   z-index: -1;
 }
@@ -85,7 +71,7 @@ li {
   opacity: 0.2;
   position: absolute;
   top: 25%;
-  right: 8%;
+  right: 12px;
   transform: scale(-1, 1);
 }
 
@@ -95,14 +81,13 @@ li {
   right: 120px;
   width: 520px;
   height: 532px;
-  background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
 }
 
 .qr-scan {
   position: absolute;
-  bottom: 10%;
-  right: -50px;
+  bottom: 10px;
+  right: 0;
   z-index: 10;
 }
 
@@ -132,6 +117,11 @@ li {
   display: flex;
   width: 50%;
   height: 100%;
+}
+
+.go-game-pc {
+  margin-left: 15%;
+  z-index: 10;
 }
 
 .qr-wrapper {
