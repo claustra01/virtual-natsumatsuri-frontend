@@ -57,18 +57,16 @@ const Shooter = () => {
 	useEffect(() => {
 		let intervalId: number | null = null;
 
-		if (!isOpen) {
-			intervalId = window.setInterval(() => {
-				sendData(message_type.status);
-			}, 100);
-		}
+		intervalId = window.setInterval(() => {
+			sendData(message_type.status);
+		}, 100);
 
 		return () => {
 			if (intervalId !== null) {
 				clearInterval(intervalId);
 			}
 		};
-	}, [isOpen, sendData]);
+	}, [sendData]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");

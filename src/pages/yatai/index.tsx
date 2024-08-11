@@ -1,6 +1,6 @@
 import { Physics, useBox } from "@react-three/cannon";
 import { Canvas, type ThreeElements, useThree } from "@react-three/fiber";
-import { useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -10,24 +10,14 @@ import type {
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
+import {
+	type ActionSchema,
+	MessageType,
+	type Target,
+} from "../../type/shooting";
 import styles from "./index.module.css";
 
-function Yatai() {
-	const socketRef = useSocketRefStore((state) => state.socketRef);
-
-	useEffect(() => {
-		const onMessage = (event: MessageEvent) => {
-			const data = JSON.parse(event.data);
-			// サーバーから受け取ったデータを使って処理をする
-			console.log(data);
-		};
-		const currentSocketRef = socketRef?.current;
-		currentSocketRef?.addEventListener("message", onMessage);
-		return () => {
-			currentSocketRef?.removeEventListener("message", onMessage);
-		};
-	}, [socketRef]);
-
+const YataiStage = memo(() => {
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
 		const args: [number, number, number] = [10, 2, 2];
@@ -129,6 +119,76 @@ function Yatai() {
 					<Target position={[3, 1.8, 0]} />
 				</Physics>
 			</Canvas>
+		</div>
+	);
+});
+
+const TargetOverlay = () => {
+	const socketRef = useSocketRefStore((state) => state.socketRef);
+
+	useEffect(() => {
+		const onMessage = (event: MessageEvent) => {
+			const data = JSON.parse(event.data);
+			// サーバーから受け取ったデータを使った処理
+			if (data.message_type === MessageType.Pointer) {
+				// aimTarget(data);
+			}
+			if (data.message_type === MessageType.Action) {
+				shotTarget(data);
+			}
+		};
+		const currentSocketRef = socketRef?.current;
+		currentSocketRef?.addEventListener("message", onMessage);
+		return () => {
+			currentSocketRef?.removeEventListener("message", onMessage);
+		};
+	}, [socketRef]);
+
+	// TODO: これらは一人用,いつかマルチプレイヤー対応する
+	const [aim, setAim] = useState<Target | undefined>(undefined);
+	// TODO: エイム照準の実装
+	// const aimTarget = (data: PointerSchema) => {
+	// 	const x = window.innerWidth * data.target.x + window.innerWidth / 2;
+	// 	const y = window.innerHeight * data.target.y + window.innerHeight / 2;
+	// 	setAim({ x, y });
+	// };
+
+	const [target, setTarget] = useState<Target | undefined>(undefined);
+	const shotTarget = (data: ActionSchema) => {
+		const x = window.innerWidth / 2 + data.target.x * 300;
+		const y = window.innerHeight / 2 + data.target.y * 300;
+		// TODO: エイム実装ができたらここのsetAimは削除する
+		setAim({ x, y });
+		setTarget({ x, y });
+	};
+
+	// DEBUG: 後で消す
+	console.log(target);
+
+	return (
+		<div
+			className={styles.target}
+			style={{
+				left: `${aim?.x}px`,
+				top: `${aim?.y}px`,
+				transform: "translate(-50%, -50%)",
+			}}
+		>
+			<img
+				src="/2D_material/target.webp"
+				alt="照準の表示"
+				width="100%"
+				height="100%"
+			/>
+		</div>
+	);
+};
+
+function Yatai() {
+	return (
+		<div className={styles.container}>
+			<YataiStage />
+			<TargetOverlay />
 		</div>
 	);
 }
