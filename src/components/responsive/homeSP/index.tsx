@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSocketRefStore } from "../../../store";
 import { requestPermission } from "../../../utils/permission";
 import { DefaultButton } from "../../ui/Button";
-import styles from "./index.module.css";
 import Rule from "../../ui/Rule";
+import styles from "./index.module.css";
 
 function HomeSP() {
 	const navigate = useNavigate();
@@ -60,7 +60,7 @@ function HomeSP() {
 						射的へ向かう
 					</DefaultButton>
 				</div>
-				<Rule/>
+				<Rule />
 			</div>
 		</div>
 	);
