@@ -5,6 +5,7 @@ import { copyStringToClipboard } from "../../../utils/copyClipBoard";
 import { requestPermission } from "../../../utils/permission";
 import QRCodeGenerator from "../../QRCodeGenerator";
 import { DefaultButton } from "../../ui/Button";
+import Rule from "../../ui/Rule";
 import TextButton from "../../ui/TextButton";
 import styles from "./index.module.css";
 
@@ -74,6 +75,10 @@ function HomePC() {
 					>
 						射的へ向かう
 					</DefaultButton>
+				</div>
+
+				<div className={styles.text}>
+					<Rule />
 				</div>
 			</div>
 			<div className={styles["right-container"]}>

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSocketRefStore } from "../../../store";
 import { requestPermission } from "../../../utils/permission";
 import { DefaultButton } from "../../ui/Button";
+import Rule from "../../ui/Rule";
 import styles from "./index.module.css";
 
 function HomeSP() {
@@ -59,8 +60,11 @@ function HomeSP() {
 						height="380"
 					/>
 				</div>
+				<div className={styles.text}>
+					<Rule />
+				</div>
 				<div className={styles["go-game-sp"]}>
-					<DefaultButton color="red" size="lg" onClick={handleClick}>
+					<DefaultButton color="red" size="md" onClick={handleClick}>
 						射的へ向かう
 					</DefaultButton>
 				</div>

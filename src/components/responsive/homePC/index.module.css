@@ -38,7 +38,8 @@
 }
 
 .background-logo {
-  opacity: 0.2;
+  opacity: 0.1;
+
   position: absolute;
   top: 50%;
   left: 24%;
@@ -158,4 +159,24 @@ li {
   transform: translate(-50%, -50%);
   font-size: 32px;
   z-index: 10;
+}
+
+.text{
+  font-size: 24px;
+  color: #212121;
+  padding: 24px;
+  font-family:  Yuji Syuku,  sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+  position: absolute; 
+  bottom: 10px; 
+  text-align: left; 
+}
+
+.white-box{
+  width: 50%;
+  height: 30%;
+  background-color: #fff;
+  opacity: 0.4;
 }
