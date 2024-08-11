@@ -11,7 +11,6 @@ import type {
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketRefStore } from "../../store";
 import {
-	type ActionSchema,
 	MessageType,
 	type PointerSchema,
 	type Target,
@@ -29,7 +28,7 @@ function Yatai() {
 				aimTarget(data);
 			}
 			if (data.message_type === MessageType.Action) {
-				shotTarget(data);
+				// shotTarget(data);
 			}
 		};
 		const currentSocketRef = socketRef?.current;
@@ -47,10 +46,10 @@ function Yatai() {
 		setAim({ x, y });
 	};
 
-	const [target, setTarget] = useState<Target | undefined>(undefined);
-	const shotTarget = (data: ActionSchema) => {
-		setTarget(data.target);
-	};
+	// const [target, setTarget] = useState<Target | undefined>(undefined);
+	// const shotTarget = (data: ActionSchema) => {
+	// 	setTarget(data.target);
+	// };
 
 	// 土台
 	const Foundation = (props: ThreeElements["mesh"]) => {
