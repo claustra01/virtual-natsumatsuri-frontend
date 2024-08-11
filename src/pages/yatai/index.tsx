@@ -124,7 +124,7 @@ const YataiStage = React.memo(() => {
 	);
 });
 
-function Yatai() {
+const TargetOverlay = () => {
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	useEffect(() => {
@@ -159,23 +159,29 @@ function Yatai() {
 	// };
 
 	return (
+		<div
+			className={styles.target}
+			style={{
+				left: `${aim?.x}px`,
+				top: `${aim?.y}px`,
+				transform: "translate(-50%, -50%)",
+			}}
+		>
+			<img
+				src="/2D_material/target.webp"
+				alt="照準の表示"
+				width="100%"
+				height="100%"
+			/>
+		</div>
+	);
+};
+
+function Yatai() {
+	return (
 		<div className={styles.container}>
 			<YataiStage />
-			<div
-				className={styles.target}
-				style={{
-					left: `${aim?.x}px`,
-					top: `${aim?.y}px`,
-					transform: "translate(-50%, -50%)",
-				}}
-			>
-				<img
-					src="/2D_material/target.webp"
-					alt="照準の表示"
-					width="100%"
-					height="100%"
-				/>
-			</div>
+			<TargetOverlay />
 		</div>
 	);
 }
