@@ -10,8 +10,13 @@ function HomeSP() {
 
 	const handleClick = () => {
 		requestPermission();
+		const params = new URLSearchParams(location.search);
+		const roomId = params.get("room_id");
 		const socketRef = new WebSocket(
-			`wss://${import.meta.env.VITE_HOST_NAME || "virtual-natsumatsuri-3jpy6th4da-an.a.run.app"}/ws?room_id=2`,
+			`wss://${
+				import.meta.env.VITE_HOST_NAME ||
+				"virtual-natsumatsuri-3jpy6th4da-an.a.run.app"
+			}/ws?room_id=${roomId}`,
 		);
 		setRef({ current: socketRef });
 		const audio = new Audio("/sound/wadaiko.mp3");
