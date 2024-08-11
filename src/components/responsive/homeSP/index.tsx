@@ -11,15 +11,19 @@ function HomeSP() {
 
 	const handleClick = () => {
 		requestPermission();
+		const params = new URLSearchParams(location.search);
+		const roomId = params.get("room_id");
 		const socketRef = new WebSocket(
-			`wss://${import.meta.env.VITE_HOST_NAME || "virtual-natsumatsuri-3jpy6th4da-an.a.run.app"}/ws?room_id=2`,
+			`wss://${import.meta.env.VITE_HOST_NAME ||
+			"virtual-natsumatsuri-3jpy6th4da-an.a.run.app"
+			}/ws?room_id=${roomId}`,
 		);
 		setRef({ current: socketRef });
 		const audio = new Audio("/sound/wadaiko.mp3");
 		audio
 			.play()
 			.then(() => {
-				setTimeout(() => {}, 500);
+				setTimeout(() => { }, 500);
 			})
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
@@ -55,12 +59,14 @@ function HomeSP() {
 						height="380"
 					/>
 				</div>
+				<div className={styles.text}>
+					<Rule />
+				</div>
 				<div className={styles["go-game-sp"]}>
-					<DefaultButton color="red" size="lg" onClick={handleClick}>
+					<DefaultButton color="red" size="md" onClick={handleClick}>
 						射的へ向かう
 					</DefaultButton>
 				</div>
-				<Rule/>
 			</div>
 		</div>
 	);

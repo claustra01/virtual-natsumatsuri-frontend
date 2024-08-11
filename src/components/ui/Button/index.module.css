@@ -15,11 +15,12 @@
     }
   
     &[data-size="lg"] {
-      padding: 8px 48px;
-      font-size: 24px;
-      font-weight: bold;
+      padding: 4px 120px;
+      font-size: 40px;
+      font-weight: regular;
       border-radius: 4px;
       white-space: nowrap;
+      left: 
     }
   
     &[data-variant="contained"] {

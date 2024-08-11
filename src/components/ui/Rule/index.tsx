@@ -1,8 +1,6 @@
-import styles from './index.module.css'
-
 function Rule() {
 	return (
-		<div className={styles.text}>
+		<div >
 			<p>〜ルール〜</p>
 			<p>
 				1,画面にスマホを向け、ポインタの位置を確認(1回につき3発のコルク玉が渡されます)
