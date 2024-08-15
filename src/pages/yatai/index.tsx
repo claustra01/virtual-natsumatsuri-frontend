@@ -12,6 +12,7 @@ import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketSender } from "../../hooks/useSocketSender";
 import { message_type } from "../../type/schema";
+import Gallery from "../../components/Gallery";
 import {
 	type ActionSchema,
 	MessageType,
@@ -206,6 +207,7 @@ function Yatai() {
 		<div className={styles.container}>
 			<YataiStage />
 			<TargetOverlay />
+			<Gallery />
 		</div>
 	);
 }
