@@ -58,7 +58,7 @@ export const YataiTarget = (props: ThreeElements["mesh"]) => {
 				[randFloat(-2, 2), 4, 8],
 				[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
 			);
-			sendData(message_type.Hit, uuid, { alpha: 0, beta: 0 });
+			sendData(message_type.hit, uuid, { alpha: 0, beta: 0 });
 		}
 	}, [uuid, target, position, api, sendData]);
 
