@@ -83,10 +83,10 @@ const YataiStage = memo(() => {
 		useEffect(() => {
 			if (!target) return;
 			if (
-				target.x * 2 > position[0] - args[0] / 2 &&
-				target.x * 2 < position[0] + args[0] / 2 &&
-				target.y * 2 > position[1] - args[1] / 2 - 2 &&
-				target.y * 2 < position[1] + args[1] / 2 - 2
+				target.x * 8 > position[0] - args[0] / 2 &&
+				target.x * 8 < position[0] + args[0] / 2 &&
+				target.y * 8 > position[1] - args[1] / 2 - 2 &&
+				target.y * 8 < position[1] + args[1] / 2 - 2
 			) {
 				api.applyImpulse(
 					[randFloat(-2, 2), 4, 8],
@@ -185,8 +185,8 @@ const TargetOverlay = () => {
 
 	// const [target, setTarget] = useState<Target | undefined>(undefined);
 	const shotTarget = (data: ActionSchema) => {
-		const x = window.innerWidth / 2 + data.target.x * 300;
-		const y = window.innerHeight / 2 + data.target.y * 300;
+		const x = window.innerWidth / 2 + data.target.x * 1200;
+		const y = window.innerHeight / 2 + data.target.y * 1200;
 		// TODO: エイム実装ができたらここのsetAimは削除する
 		setAim({ x, y });
 		// setTarget({ x, y });
