@@ -12,6 +12,7 @@ import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, event_type, message_type } from "../../type/schema";
 import style from "./index.module.css";
 import { useSocketReciever } from "../../hooks/useSocketReciever";
+import { MessageType } from "../../type/shooting";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
@@ -73,9 +74,9 @@ const Shooter = () => {
 
 	useEffect(() => {
 		onMessage((data) => {
-			if (data.id === uuid) {
+			if (data.message_type == MessageType.Hit  && data.id === uuid) {
 				setScore((prevScore) => prevScore + 1);
-				console.debug(score);
+				console.log(score);
 			}
 		});
 	}, [onMessage])
