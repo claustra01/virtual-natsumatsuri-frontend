@@ -11,10 +11,13 @@ import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, event_type, message_type } from "../../type/schema";
 import style from "./index.module.css";
+import { useSocketReciever } from "../../hooks/useSocket";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
+	const [score, setScore] = useState<number>(0);
 	const { orientationDiff } = useOrientation();
+	const { onMessage } = useSocketReciever();
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	const initialImages = [
@@ -67,6 +70,15 @@ const Shooter = () => {
 			}
 		};
 	}, [sendData]);
+
+	useEffect(() => {
+		onMessage((data) => {
+			if (data.id === uuid) {
+				setScore((prevScore) => prevScore + 1);
+				console.debug(score);
+			}
+		});
+	}, [onMessage])
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");

@@ -1,6 +1,7 @@
 export enum MessageType {
 	Pointer = "pointer",
 	Action = "action",
+	Hit = "hit",
 }
 
 export interface Target {
@@ -25,4 +26,9 @@ export interface ActionSchema {
 	message_type: MessageType.Action;
 	target: Target;
 	vector: Vector;
+}
+
+export interface HitSchema {
+	id: string;
+	message_type: MessageType.Hit;
 }
