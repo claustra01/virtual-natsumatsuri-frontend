@@ -28,7 +28,7 @@ interface distance {
 export enum message_type {
 	status = "status",
 	action = "action",
-	Hit = "hit",
+	hit = "hit",
 }
 
 export enum event_type {
