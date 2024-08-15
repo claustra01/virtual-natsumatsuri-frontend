@@ -16,6 +16,7 @@ import {
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
+import { useSocketReciever } from "../../hooks/useSocketReciever";
 
 const YataiStage = memo(() => {
 	// 土台
@@ -49,6 +50,7 @@ const YataiStage = memo(() => {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
+		const { onMessage } = useSocketReciever();
 		const position = props.position as [number, number, number];
 
 		const args: [number, number, number] = [0.7, 2, 0.7];
@@ -58,21 +60,13 @@ const YataiStage = memo(() => {
 			args: args,
 		}));
 
-		const socketRef = useSocketRefStore((state) => state.socketRef);
-
 		useEffect(() => {
-			const onMessage = (event: MessageEvent) => {
-				const data = JSON.parse(event.data);
+			onMessage((data) => {
 				if (data.message_type === MessageType.Action) {
 					shotTarget(data);
 				}
-			};
-			const currentSocketRef = socketRef?.current;
-			currentSocketRef?.addEventListener("message", onMessage);
-			return () => {
-				currentSocketRef?.removeEventListener("message", onMessage);
-			};
-		}, [socketRef]);
+			});
+		}, [onMessage]);
 
 		// TODO: これらは一人用,いつかマルチプレイヤー対応する
 		const [target, setTarget] = useState<Target | undefined>(undefined);
@@ -154,25 +148,16 @@ const YataiStage = memo(() => {
 });
 
 const TargetOverlay = () => {
-	const socketRef = useSocketRefStore((state) => state.socketRef);
+	const { onMessage } = useSocketReciever();
 
 	useEffect(() => {
-		const onMessage = (event: MessageEvent) => {
-			const data = JSON.parse(event.data);
-			// サーバーから受け取ったデータを使った処理
-			if (data.message_type === MessageType.Pointer) {
-				// aimTarget(data);
-			}
+		onMessage((data) => {
+			// ここも本来はPointerSchemaになる
 			if (data.message_type === MessageType.Action) {
 				shotTarget(data);
 			}
-		};
-		const currentSocketRef = socketRef?.current;
-		currentSocketRef?.addEventListener("message", onMessage);
-		return () => {
-			currentSocketRef?.removeEventListener("message", onMessage);
-		};
-	}, [socketRef]);
+		});
+	}, [onMessage]);
 
 	// TODO: これらは一人用,いつかマルチプレイヤー対応する
 	const [aim, setAim] = useState<Target | undefined>(undefined);
