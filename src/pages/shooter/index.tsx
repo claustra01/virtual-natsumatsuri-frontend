@@ -8,7 +8,7 @@ import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
-import { useSocketRefStore, useUUIDStore } from "../../store";
+import { useUUIDStore } from "../../store";
 import { message_type } from "../../type/schema";
 import { MessageType } from "../../type/shooting";
 import style from "./index.module.css";
