@@ -1,6 +1,6 @@
 import styles from "./index.module.css";
 
-function Garelly() {
+function Gallery() {
 	return (
 		<div>
 			{/* biome-ignore lint/a11y/useMediaCaption: 夏祭りの音を再生します。 */}
@@ -29,4 +29,4 @@ function Garelly() {
 		</div>
 	);
 }
-export default Garelly;
+export default Gallery;

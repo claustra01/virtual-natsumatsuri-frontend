@@ -9,7 +9,6 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
-import Garelly from "../../components/Garelly";
 import { useSocketRefStore } from "../../store";
 import {
 	type ActionSchema,
@@ -17,6 +16,7 @@ import {
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
+import Gallery from "../../components/Gallery";
 
 const YataiStage = memo(() => {
 	// 土台
@@ -217,7 +217,7 @@ function Yatai() {
 		<div className={styles.container}>
 			<YataiStage />
 			<TargetOverlay />
-			<Garelly />
+			<Gallery />
 		</div>
 	);
 }
