@@ -11,7 +11,7 @@ import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, event_type, message_type } from "../../type/schema";
 import style from "./index.module.css";
-import { useSocketReciever } from "../../hooks/useSocket";
+import { useSocketReciever } from "../../hooks/useSocketReciever";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
