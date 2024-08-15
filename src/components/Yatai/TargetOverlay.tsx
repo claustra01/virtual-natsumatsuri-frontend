@@ -43,14 +43,12 @@ export const TargetOverlay = () => {
 			style={{
 				left: `${aim?.x}px`,
 				top: `${aim?.y}px`,
-				transform: "translate(-50%, -50%)",
 			}}
 		>
 			<img
 				src="/2D_material/target.webp"
 				alt="照準の表示"
-				width="100%"
-				height="100%"
+				className={styles.image}
 			/>
 		</div>
 	);
