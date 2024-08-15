@@ -9,10 +9,10 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
+import Gallery from "../../components/Gallery";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketSender } from "../../hooks/useSocketSender";
 import { message_type } from "../../type/schema";
-import Gallery from "../../components/Gallery";
 import {
 	type ActionSchema,
 	MessageType,
