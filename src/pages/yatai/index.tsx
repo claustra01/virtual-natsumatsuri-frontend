@@ -9,7 +9,7 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
-import Garally from "../../components/garary";
+import Garally from "../../components/Garally";
 import { useSocketRefStore } from "../../store";
 import {
 	type ActionSchema,
