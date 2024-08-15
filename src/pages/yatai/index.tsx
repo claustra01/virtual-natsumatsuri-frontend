@@ -9,8 +9,8 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
-import { useSocketReciever } from "../../hooks/useSocketReciever";
-import { useSocketRefStore } from "../../store";
+import { useSocketReceiver } from "../../hooks/useSocketReceiver";
+
 import {
 	type ActionSchema,
 	MessageType,
@@ -50,7 +50,7 @@ const YataiStage = memo(() => {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
-		const { onMessage } = useSocketReciever();
+		const { onMessage } = useSocketReceiver();
 		const position = props.position as [number, number, number];
 
 		const args: [number, number, number] = [0.7, 2, 0.7];
@@ -148,7 +148,7 @@ const YataiStage = memo(() => {
 });
 
 const TargetOverlay = () => {
-	const { onMessage } = useSocketReciever();
+	const { onMessage } = useSocketReceiver();
 
 	useEffect(() => {
 		onMessage((data) => {

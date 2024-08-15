@@ -8,7 +8,7 @@ import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
-import { useSocketReciever } from "../../hooks/useSocketReciever";
+import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, event_type, message_type } from "../../type/schema";
 import { MessageType } from "../../type/shooting";
@@ -18,7 +18,7 @@ const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [score, setScore] = useState<number>(0);
 	const { orientationDiff } = useOrientation();
-	const { onMessage } = useSocketReciever();
+	const { onMessage } = useSocketReceiver();
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	const initialImages = [

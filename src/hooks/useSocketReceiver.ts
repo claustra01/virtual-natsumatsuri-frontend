@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSocketRefStore } from "../store";
 import type { ActionSchema, HitSchema, PointerSchema } from "../type/shooting";
 
-export const useSocketReciever = () => {
+export const useSocketReceiver = () => {
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	const onMessage = (
