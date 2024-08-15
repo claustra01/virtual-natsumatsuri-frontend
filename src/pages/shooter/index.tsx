@@ -1,18 +1,14 @@
-import {
-	type KeyboardEventHandler,
-	useEffect,
-	useState,
-} from "react";
+import { type KeyboardEventHandler, useEffect, useState } from "react";
 import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
+import { useSocketSender } from "../../hooks/useSocketSender";
 import { useUUIDStore } from "../../store";
 import { message_type } from "../../type/schema";
 import { MessageType } from "../../type/shooting";
 import style from "./index.module.css";
-import { useSocketSender } from "../../hooks/useSocketSender";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
@@ -42,7 +38,7 @@ const Shooter = () => {
 				clearInterval(intervalId);
 			}
 		};
-	}, [sendData]);
+	}, [uuid, orientationDiff, sendData]);
 
 	useEffect(() => {
 		onMessage((data) => {

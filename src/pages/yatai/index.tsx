@@ -10,7 +10,8 @@ import type {
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
-
+import { useSocketSender } from "../../hooks/useSocketSender";
+import { message_type } from "../../type/schema";
 import {
 	type ActionSchema,
 	MessageType,
@@ -50,6 +51,7 @@ const YataiStage = memo(() => {
 
 	// 的
 	const Target = (props: ThreeElements["mesh"]) => {
+		const { sendData } = useSocketSender();
 		const { onMessage } = useSocketReceiver();
 		const position = props.position as [number, number, number];
 
@@ -69,8 +71,10 @@ const YataiStage = memo(() => {
 		}, [onMessage]);
 
 		// TODO: これらは一人用,いつかマルチプレイヤー対応する
+		const [uuid, setUuid] = useState<string>("");
 		const [target, setTarget] = useState<Target | undefined>(undefined);
 		const shotTarget = (data: ActionSchema) => {
+			setUuid(data.id);
 			setTarget({ x: data.target.x, y: data.target.y });
 		};
 
@@ -86,8 +90,9 @@ const YataiStage = memo(() => {
 					[randFloat(-2, 2), 4, 8],
 					[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
 				);
+				sendData(message_type.Hit, uuid, { alpha: 0, beta: 0 });
 			}
-		}, [target, position, api]);
+		}, [uuid, target, position, api, sendData]);
 
 		return (
 			<mesh

@@ -1,12 +1,16 @@
 import { useCallback } from "react";
-import { event_type, message_type, Schema } from "../type/schema";
 import { useSocketRefStore } from "../store";
+import { type Schema, event_type, type message_type } from "../type/schema";
 
 export const useSocketSender = () => {
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
 	const sendData = useCallback(
-		(mes_type: message_type, uuid: string, orientationDiff: { alpha: number, beta: number }) => {
+		(
+			mes_type: message_type,
+			uuid: string,
+			orientationDiff: { alpha: number; beta: number },
+		) => {
 			const data: Schema = {
 				id: uuid,
 				interval: 0,
@@ -30,7 +34,7 @@ export const useSocketSender = () => {
 			console.log(data);
 			socketRef?.current?.send(JSON.stringify(data));
 		},
-		[socketRef]
+		[socketRef],
 	);
 
 	return { sendData };
