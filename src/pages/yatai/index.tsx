@@ -16,6 +16,7 @@ import {
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
+import Garally from "../../components/garary";
 
 const YataiStage = memo(() => {
 	// 土台
@@ -216,6 +217,7 @@ function Yatai() {
 		<div className={styles.container}>
 			<YataiStage />
 			<TargetOverlay />
+			<Garally/>
 		</div>
 	);
 }
