@@ -9,7 +9,7 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
-import Garally from "../../components/Garally";
+import Garelly from "../../components/Garelly";
 import { useSocketRefStore } from "../../store";
 import {
 	type ActionSchema,
@@ -217,7 +217,7 @@ function Yatai() {
 		<div className={styles.container}>
 			<YataiStage />
 			<TargetOverlay />
-			<Garally />
+			<Garelly />
 		</div>
 	);
 }

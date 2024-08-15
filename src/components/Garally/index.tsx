@@ -1,6 +1,6 @@
 import styles from "./index.module.css";
 
-function Garally() {
+function Garelly() {
 	return (
 		<div>
 			{/* biome-ignore lint/a11y/useMediaCaption: <explanation> */}
@@ -24,4 +24,4 @@ function Garally() {
 		</div>
 	);
 }
-export default Garally;
+export default Garelly;
