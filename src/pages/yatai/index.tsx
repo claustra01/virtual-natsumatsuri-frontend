@@ -9,6 +9,7 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
+import { useSocketReciever } from "../../hooks/useSocketReciever";
 import { useSocketRefStore } from "../../store";
 import {
 	type ActionSchema,
@@ -16,7 +17,6 @@ import {
 	type Target,
 } from "../../type/shooting";
 import styles from "./index.module.css";
-import { useSocketReciever } from "../../hooks/useSocketReciever";
 
 const YataiStage = memo(() => {
 	// 土台

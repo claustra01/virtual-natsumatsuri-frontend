@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useSocketRefStore } from "../store";
-import { PointerSchema, ActionSchema, HitSchema } from "../type/shooting";
+import type { ActionSchema, HitSchema, PointerSchema } from "../type/shooting";
 
 export const useSocketReciever = () => {
 	const socketRef = useSocketRefStore((state) => state.socketRef);
 
-	const onMessage = (handler: (data: (PointerSchema | ActionSchema | HitSchema)) => void) => {
+	const onMessage = (
+		handler: (data: PointerSchema | ActionSchema | HitSchema) => void,
+	) => {
 		useEffect(() => {
 			const onMessage = (event: MessageEvent) => {
 				const data = JSON.parse(event.data);
@@ -17,7 +19,7 @@ export const useSocketReciever = () => {
 			return () => {
 				currentSocketRef?.removeEventListener("message", onMessage);
 			};
-		}, [socketRef, handler]);
+		}, [handler]);
 	};
 
 	return { onMessage };

@@ -8,11 +8,11 @@ import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
 import { useOrientation } from "../../hooks/useOrientation";
+import { useSocketReciever } from "../../hooks/useSocketReciever";
 import { useSocketRefStore, useUUIDStore } from "../../store";
 import { type Schema, event_type, message_type } from "../../type/schema";
-import style from "./index.module.css";
-import { useSocketReciever } from "../../hooks/useSocketReciever";
 import { MessageType } from "../../type/shooting";
+import style from "./index.module.css";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
@@ -74,12 +74,12 @@ const Shooter = () => {
 
 	useEffect(() => {
 		onMessage((data) => {
-			if (data.message_type == MessageType.Hit  && data.id === uuid) {
+			if (data.message_type === MessageType.Hit && data.id === uuid) {
 				setScore((prevScore) => prevScore + 1);
 				console.log(score);
 			}
 		});
-	}, [onMessage])
+	}, [onMessage, uuid, score]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
