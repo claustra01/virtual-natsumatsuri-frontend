@@ -9,6 +9,7 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
+import Gallery from "../../components/Gallery";
 import { useSocketRefStore } from "../../store";
 import {
 	type ActionSchema,
@@ -216,6 +217,7 @@ function Yatai() {
 		<div className={styles.container}>
 			<YataiStage />
 			<TargetOverlay />
+			<Gallery />
 		</div>
 	);
 }
