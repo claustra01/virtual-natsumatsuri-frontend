@@ -2,5 +2,5 @@
   "ignorePaths": ["node_modules/**", "*.svg"],
   "version": "0.2",
   "language": "en",
-  "words": ["NATSUMATSURI", "yatai", "Dela", "Yuji", "Syuku", "zustand", "wadaiko", "qrcode"]
+  "words": ["NATSUMATSURI", "yatai", "Dela", "Yuji", "Syuku", "zustand", "wadaiko", "qrcode","nobori","natsu","matsuri"]
 }
