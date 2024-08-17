@@ -3,18 +3,25 @@ import Home from "./pages/home";
 import Result from "./pages/result";
 import Shooter from "./pages/shooter";
 import Yatai from "./pages/yatai";
+import { useState } from "react";
 
 const AppRoutes = () => {
-	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/shooter" element={<Shooter />} />
-				<Route path="/yatai" element={<Yatai />} />
-				<Route path="/result" element={<Result />} />
-			</Routes>
-		</>
-	);
+  const [score, setScore] = useState<number>(0);
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/shooter"
+        element={<Shooter setScore={setScore} />} 
+      />
+      <Route
+        path="/result"
+        element={<Result score={score} />} 
+      />
+      <Route path="/yatai" element={<Yatai />} />
+    </Routes>
+  );
 };
 
 export default AppRoutes;
