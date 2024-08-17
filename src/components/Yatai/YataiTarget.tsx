@@ -43,10 +43,12 @@ export const YataiTarget = (props: ThreeElements["mesh"]) => {
 
 	const position = props.position as [number, number, number];
 	const property = getTargetProperty(position);
-  const { targetStatus, updateTargetStatus } = useTargetStatusStore((state) => ({
-    targetStatus: state.targetStatus,
-    updateTargetStatus: state.updateTargetStatus,
-  }));
+	const { targetStatus, updateTargetStatus } = useTargetStatusStore(
+		(state) => ({
+			targetStatus: state.targetStatus,
+			updateTargetStatus: state.updateTargetStatus,
+		}),
+	);
 
 	//
 	const size: [number, number, number] = useMemo(() => {
