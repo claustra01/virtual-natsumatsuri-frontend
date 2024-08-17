@@ -83,7 +83,6 @@ const Shooter = () => {
 			handleClick();
 		}
 	};
-	console.log("hige");
 
 	return (
 		<div>
