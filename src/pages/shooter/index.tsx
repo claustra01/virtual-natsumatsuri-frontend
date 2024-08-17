@@ -17,7 +17,7 @@ type ShooterProps = {
 
 const Shooter = ({ setScore }: ShooterProps) => {
 	const [isOpen, setIsOpen] = useState(true);
-	const [score, setLocalScore] = useState<number>(0);
+	const [score, setScoreState] = useState<number>(0);
 	const { orientationDiff } = useOrientation();
 	const { sendData } = useSocketSender();
 	const { onMessage } = useSocketReceiver();
@@ -49,17 +49,17 @@ const Shooter = ({ setScore }: ShooterProps) => {
 		onMessage((data) => {
 			if (data.message_type === MessageType.Hit && data.id === uuid) {
 				const newScore = score + 1;
-				setLocalScore(newScore);
-				setScore(newScore);
+				setScoreState(newScore);
 			}
 		});
-	}, [onMessage, uuid, score, setScore]);
+	}, [onMessage, uuid, score]);
 
 	useEffect(() => {
 		if (images.length === 0) {
+			setScore(score);
 			navigate("/result", { state: { score } });
 		}
-	}, [images, navigate, score]);
+	}, [images, navigate, score, setScore]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
@@ -103,6 +103,7 @@ type ModalContentProps = {
 };
 
 const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
+	const { reset } = useOrientation();
 	return (
 		<div className={style["modal-wrapper"]}>
 			<img
@@ -123,7 +124,10 @@ const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
 					variant="outlined"
 					color="red"
 					size="md"
-					onClick={() => setIsOpen(false)}
+					onClick={() => {
+						reset();
+						setIsOpen(false);
+					}}
 				>
 					置いたよ！
 				</DefaultButton>
