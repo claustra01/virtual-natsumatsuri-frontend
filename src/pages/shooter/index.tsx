@@ -1,21 +1,21 @@
-import { type KeyboardEventHandler, useEffect, useState } from "react";
+import {
+	type KeyboardEventHandler,
+	useCallback,
+	useEffect,
+	useState,
+} from "react";
 import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
-import { useOrientation } from "../../hooks/useOrientation";
-import { useSocketReceiver } from "../../hooks/useSocketReceiver";
+import type { Orientation } from "../../hooks/useOrientation";
 import { useSocketSender } from "../../hooks/useSocketSender";
 import { useUUIDStore } from "../../store";
 import { message_type } from "../../type/schema";
-import { MessageType } from "../../type/shooting";
 import style from "./index.module.css";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
-	const [score, setScore] = useState<number>(0);
-	const { orientationDiff } = useOrientation();
 	const { sendData } = useSocketSender();
-	const { onMessage } = useSocketReceiver();
 
 	const initialImages = [
 		"/2D_material/cork.webp",
@@ -25,31 +25,49 @@ const Shooter = () => {
 
 	const [images, setImages] = useState(initialImages);
 	const uuid = useUUIDStore((state) => state.uuid);
+	//   const intervalId = useRef<number | null>(null);
+	const [initialOrientation, setInitialOrientation] = useState<Orientation>({
+		alpha: 0,
+		beta: 0,
+		gamma: 0,
+	});
 
+	const send = useCallback(
+		(event: DeviceOrientationEvent, msg_type: message_type) => {
+			if (!event.alpha || !event.beta || !event.gamma) {
+				return;
+			}
+			console.log(event.alpha, event.beta, event.gamma);
+			sendData(msg_type, uuid, {
+				alpha: initialOrientation
+					? (event.gamma - initialOrientation.gamma) * 2
+					: event.gamma,
+				beta: initialOrientation
+					? event.beta - initialOrientation.beta
+					: event.beta,
+			});
+		},
+		[sendData, uuid, initialOrientation],
+	);
 	useEffect(() => {
-		let intervalId: number | null = null;
-
-		intervalId = window.setInterval(() => {
-			sendData(message_type.status, uuid, orientationDiff);
+		const intervalId = setInterval(() => {
+			window.addEventListener(
+				"deviceorientation",
+				(event) => send(event, message_type.status),
+				{ once: true },
+			);
 		}, 100);
-
 		return () => {
-			if (intervalId !== null) {
-				clearInterval(intervalId);
-			}
+			clearInterval(intervalId);
 		};
-	}, [uuid, orientationDiff, sendData]);
+	}, [send]);
 
-	useEffect(() => {
-		onMessage((data) => {
-			if (data.message_type === MessageType.Hit && data.id === uuid) {
-				setScore((prevScore) => prevScore + 1);
-				console.log(score);
-			}
-		});
-	}, [onMessage, uuid, score]);
-
-	const handleClick = () => {
+	const handleClick = async () => {
+		window.addEventListener(
+			"deviceorientation",
+			(event) => send(event, message_type.action),
+			{ once: true },
+		);
 		const audio = new Audio("/sound/cork_sound.mp3");
 		audio
 			.play()
@@ -57,7 +75,6 @@ const Shooter = () => {
 			.catch((error) => {
 				console.error("オーディオの音が出なかった", error);
 			});
-		sendData(message_type.action, uuid, orientationDiff);
 		setImages((prevImages) => prevImages.slice(1));
 	};
 
@@ -66,11 +83,15 @@ const Shooter = () => {
 			handleClick();
 		}
 	};
+	console.log("hige");
 
 	return (
 		<div>
 			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
-				<ModalContent setIsOpen={setIsOpen} />
+				<ModalContent
+					setIsOpen={setIsOpen}
+					setInitialOrientation={setInitialOrientation}
+				/>
 			</Modal>
 			<div className={style.trigger}>
 				<ShooterButton onClick={handleClick} onKeyUp={handleKeyUp} />
@@ -81,16 +102,36 @@ const Shooter = () => {
 					<img key={i} src={src} alt="コルクの残量を表示しています" />
 				))}
 			</div>
+			<p>{initialOrientation.alpha}</p>
+			<p>{initialOrientation.beta}</p>
+			<p>{initialOrientation.gamma}</p>
 		</div>
 	);
 };
 
 type ModalContentProps = {
 	setIsOpen: (isOpen: boolean) => void;
+	setInitialOrientation: (orientation: Orientation) => void;
 };
 
-const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
-	const { reset } = useOrientation();
+const ModalContent: React.FC<ModalContentProps> = ({
+	setIsOpen,
+	setInitialOrientation,
+}) => {
+	const handleClick = () => {
+		window.addEventListener(
+			"deviceorientation",
+			(event) => {
+				setInitialOrientation({
+					alpha: event.alpha || 0,
+					beta: event.beta || 0,
+					gamma: event.gamma || 0,
+				});
+			},
+			{ once: true },
+		);
+		setIsOpen(false);
+	};
 	return (
 		<div className={style["modal-wrapper"]}>
 			<img
@@ -111,10 +152,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
 					variant="outlined"
 					color="red"
 					size="md"
-					onClick={() => {
-						reset();
-						setIsOpen(false);
-					}}
+					onClick={handleClick}
 				>
 					置いたよ！
 				</DefaultButton>
