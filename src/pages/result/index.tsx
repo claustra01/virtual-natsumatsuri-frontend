@@ -14,7 +14,7 @@ const Result = ({ score }: ResultProps) => {
 		"/drink/bottle3.webp",
 	];
 
-	const image = images[score];
+	const image = images[score] || images[0];
 
 	return (
 		<div>
@@ -38,11 +38,11 @@ const Result = ({ score }: ResultProps) => {
 				/>
 			</div>
 			<div className={styles["get-text"]}>
-				<p>${score}本倒した！</p>
+				<p>{score}本倒した！</p>
 			</div>
 			<div className={styles["share-btn"]}>
 				<a
-					href="https://twitter.com/intent/tweet?text=Webの射的で遊んだよ.${score}本倒した！%20%23virtualnatsumatsuri"
+					href={`https://twitter.com/intent/tweet?text=Webの射的で遊んだよ。${score}本倒した！%20%23virtualnatsumatsuri`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>

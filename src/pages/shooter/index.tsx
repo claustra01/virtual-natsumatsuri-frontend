@@ -1,4 +1,5 @@
 import { type KeyboardEventHandler, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
@@ -21,6 +22,7 @@ const Shooter = ({ setScore }: ShooterProps) => {
 	const { sendData } = useSocketSender();
 	const { onMessage } = useSocketReceiver();
 	const uuid = useUUIDStore((state) => state.uuid);
+	const navigate = useNavigate();
 
 	const initialImages = [
 		"/2D_material/cork.webp",
@@ -46,11 +48,18 @@ const Shooter = ({ setScore }: ShooterProps) => {
 	useEffect(() => {
 		onMessage((data) => {
 			if (data.message_type === MessageType.Hit && data.id === uuid) {
-				setLocalScore((prevScore) => prevScore + 1);
-				setScore(score);
+				const newScore = score + 1;
+				setLocalScore(newScore);
+				setScore(newScore);
 			}
 		});
 	}, [onMessage, uuid, score, setScore]);
+
+	useEffect(() => {
+		if (images.length === 0) {
+			navigate("/result", { state: { score } });
+		}
+	}, [images, navigate, score]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
@@ -77,8 +86,9 @@ const Shooter = ({ setScore }: ShooterProps) => {
 			</div>
 			<div className={style.cork}>
 				{images.length > 0 ? (
-					images.map((src) => (
-						<img key={src} src={src} alt="コルクの残量を表示しています" />
+					images.map((src, i) => (
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						<img key={i} src={src} alt="コルクの残量を表示しています" />
 					))
 				) : (
 					<p>コルクがなくなりました!</p>

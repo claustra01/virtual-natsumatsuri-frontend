@@ -6,7 +6,7 @@ import Shooter from "./pages/shooter";
 import Yatai from "./pages/yatai";
 
 const AppRoutes = () => {
-	const [score, setScore] = useState<number>(0);
+	const [score, setScore] = useState(0);
 
 	return (
 		<Routes>
