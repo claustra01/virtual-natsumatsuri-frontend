@@ -101,9 +101,6 @@ const Shooter = () => {
 					<img key={i} src={src} alt="コルクの残量を表示しています" />
 				))}
 			</div>
-			<p>{initialOrientation.alpha}</p>
-			<p>{initialOrientation.beta}</p>
-			<p>{initialOrientation.gamma}</p>
 		</div>
 	);
 };
