@@ -1,6 +1,6 @@
 import { useBox } from "@react-three/cannon";
 import type { ThreeElements } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type {
 	BufferGeometry,
 	Material,
@@ -9,25 +9,56 @@ import type {
 	Object3DEventMap,
 } from "three";
 import { randFloat } from "three/src/math/MathUtils.js";
+import { type TargetProperty, initialTargets } from "../../const/target";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketSender } from "../../hooks/useSocketSender";
+import { useTargetStatusStore } from "../../store";
 import { message_type } from "../../type/schema";
 import {
 	type ActionSchema,
 	MessageType,
 	type Target,
 } from "../../type/shooting";
+import { TargetStatus } from "../../type/target";
+
+const getTargetProperty = (pos: [number, number, number]): TargetProperty => {
+	const target = initialTargets.find(
+		(target) =>
+			target.pos.x === pos[0] &&
+			target.pos.y === pos[1] &&
+			target.pos.z === pos[2],
+	);
+	return (
+		target || {
+			index: -1,
+			pos: { x: 0, y: 0, z: 0 },
+			size: { x: 0, y: 0, z: 0 },
+		}
+	);
+};
 
 export const YataiTarget = (props: ThreeElements["mesh"]) => {
 	const { sendData } = useSocketSender();
 	const { onMessage } = useSocketReceiver();
-	const position = props.position as [number, number, number];
 
-	const args: [number, number, number] = [0.7, 2, 0.7];
+	const position = props.position as [number, number, number];
+	const property = getTargetProperty(position);
+	const { targetStatus, updateTargetStatus } = useTargetStatusStore(
+		(state) => ({
+			targetStatus: state.targetStatus,
+			updateTargetStatus: state.updateTargetStatus,
+		}),
+	);
+
+	//
+	const size: [number, number, number] = useMemo(() => {
+		return [property.size.x, property.size.y, property.size.z];
+	}, [property.size]);
+
 	const [ref, api] = useBox(() => ({
 		mass: 1,
 		position: position,
-		args: args,
+		args: size,
 	}));
 
 	useEffect(() => {
@@ -49,18 +80,30 @@ export const YataiTarget = (props: ThreeElements["mesh"]) => {
 	useEffect(() => {
 		if (!target) return;
 		if (
-			target.x * 8 > position[0] - args[0] / 2 &&
-			target.x * 8 < position[0] + args[0] / 2 &&
-			target.y * 8 > position[1] - args[1] / 2 - 2 &&
-			target.y * 8 < position[1] + args[1] / 2 - 2
+			targetStatus[property.index] === TargetStatus.Live &&
+			target.x * 8 > position[0] - size[0] / 2 &&
+			target.x * 8 < position[0] + size[0] / 2 &&
+			target.y * 8 > position[1] - size[1] / 2 - 2 &&
+			target.y * 8 < position[1] + size[1] / 2 - 2
 		) {
 			api.applyImpulse(
 				[randFloat(-2, 2), 4, 8],
 				[randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1)],
 			);
+			updateTargetStatus(property.index, TargetStatus.Hit);
 			sendData(message_type.hit, uuid, { alpha: 0, beta: 0 });
 		}
-	}, [uuid, target, position, api, sendData]);
+	}, [
+		target,
+		targetStatus,
+		property,
+		position,
+		size,
+		api,
+		sendData,
+		updateTargetStatus,
+		uuid,
+	]);
 
 	return (
 		<mesh
@@ -77,7 +120,7 @@ export const YataiTarget = (props: ThreeElements["mesh"]) => {
 			castShadow
 			receiveShadow
 		>
-			<boxGeometry args={[...args]} />
+			<boxGeometry args={[...size]} />
 			<meshStandardMaterial color={"yellow"} />
 		</mesh>
 	);

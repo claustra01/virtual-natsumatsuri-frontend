@@ -1,6 +1,7 @@
 import { Physics } from "@react-three/cannon";
 import { Canvas } from "@react-three/fiber";
 import { memo } from "react";
+import { initialTargets } from "../../const/target";
 import { CameraController } from "./CameraController";
 import { YataiFoundation } from "./YataiFoundation";
 import styles from "./YataiStage.module.css";
@@ -28,9 +29,12 @@ export const YataiStage = memo(() => {
 					<CameraController />
 					<YataiFoundation position={[0, 2, -2]} />
 					<YataiFoundation position={[0, 0, 0]} />
-					<YataiTarget position={[-3, 1.8, 0]} />
-					<YataiTarget position={[0, 1.8, 0]} />
-					<YataiTarget position={[3, 1.8, 0]} />
+					{initialTargets.map((target) => (
+						<YataiTarget
+							key={target.index}
+							position={[target.pos.x, target.pos.y, target.pos.z]}
+						/>
+					))}
 				</Physics>
 			</Canvas>
 		</div>
