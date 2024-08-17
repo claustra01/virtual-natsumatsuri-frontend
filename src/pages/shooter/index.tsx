@@ -61,11 +61,11 @@ const Shooter = () => {
 		setImages((prevImages) => prevImages.slice(1));
 	};
 
-	const handleKeyUp: KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (event.key === "Enter" || event.key === " ") {
-			handleClick();
-		}
-	};
+  const handleKeyUp: KeyboardEventHandler<HTMLDivElement> = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      handleClick();
+    }
+  };
 
 	return (
 		<div>
@@ -86,7 +86,7 @@ const Shooter = () => {
 };
 
 type ModalContentProps = {
-	setIsOpen: (isOpen: boolean) => void;
+  setIsOpen: (isOpen: boolean) => void;
 };
 
 const ModalContent: React.FC<ModalContentProps> = ({ setIsOpen }) => {
