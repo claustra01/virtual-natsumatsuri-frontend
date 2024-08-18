@@ -9,10 +9,10 @@ export const TargetOverlay = () => {
 
 	useEffect(() => {
 		onMessage((data) => {
-			if (data.message_type === MessageType.Action) {
-				shotTarget(data);
-			}
-			if (data.message_type === MessageType.Pointer) {
+			if (
+				data.message_type === MessageType.Action ||
+				data.message_type === MessageType.Pointer
+			) {
 				aimTarget(data);
 			}
 		});
@@ -20,13 +20,7 @@ export const TargetOverlay = () => {
 
 	// TODO: これらは一人用,いつかマルチプレイヤー対応する
 	const [aim, setAim] = useState<Target | undefined>(undefined);
-	const aimTarget = (data: PointerSchema) => {
-		const x = window.innerWidth / 2 + data.target.x * 1200;
-		const y = window.innerHeight / 2 + data.target.y * 1200;
-		setAim({ x, y });
-	};
-
-	const shotTarget = (data: ActionSchema) => {
+	const aimTarget = (data: PointerSchema | ActionSchema) => {
 		const x = window.innerWidth / 2 + data.target.x * 1200;
 		const y = window.innerHeight / 2 + data.target.y * 1200;
 		setAim({ x, y });
