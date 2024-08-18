@@ -1,4 +1,5 @@
 import { type KeyboardEventHandler, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DefaultButton } from "../../components/ui/Button";
 import { Modal } from "../../components/ui/Modal";
 import { ShooterButton } from "../../components/ui/ShooterButton";
@@ -6,25 +7,27 @@ import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketSender } from "../../hooks/useSocketSender";
 import { useUUIDStore } from "../../store";
+import { useScoreStore } from "../../store/useScoreStore";
 import { message_type } from "../../type/schema";
 import { MessageType } from "../../type/shooting";
 import style from "./index.module.css";
 
 const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
-	const [score, setScore] = useState<number>(0);
 	const { orientationDiff } = useOrientation();
 	const { sendData } = useSocketSender();
 	const { onMessage } = useSocketReceiver();
+	const uuid = useUUIDStore((state) => state.uuid);
+	const navigate = useNavigate();
+	const score = useScoreStore((state) => state.score);
+	const addOneScore = useScoreStore((state) => state.addOneScore);
 
 	const initialImages = [
 		"/2D_material/cork.webp",
 		"/2D_material/cork.webp",
 		"/2D_material/cork.webp",
 	];
-
 	const [images, setImages] = useState(initialImages);
-	const uuid = useUUIDStore((state) => state.uuid);
 
 	useEffect(() => {
 		let intervalId: number | null = null;
@@ -33,30 +36,28 @@ const Shooter = () => {
 			sendData(message_type.status, uuid, orientationDiff);
 		}, 100);
 
-		return () => {
-			if (intervalId !== null) {
-				clearInterval(intervalId);
-			}
-		};
+		return () => clearInterval(intervalId);
 	}, [uuid, orientationDiff, sendData]);
 
 	useEffect(() => {
 		onMessage((data) => {
 			if (data.message_type === MessageType.Hit && data.id === uuid) {
-				setScore((prevScore) => prevScore + 1);
-				console.log(score);
+				addOneScore();
 			}
 		});
-	}, [onMessage, uuid, score]);
+	}, [onMessage, uuid, addOneScore]);
+
+	useEffect(() => {
+		if (images.length === 0) {
+			navigate("/result", { state: { score } });
+		}
+	}, [images, navigate, score]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");
-		audio
-			.play()
-			.then(() => {})
-			.catch((error) => {
-				console.error("オーディオの音が出なかった", error);
-			});
+		audio.play().catch((error) => {
+			console.error("オーディオの音が出なかった", error);
+		});
 		sendData(message_type.action, uuid, orientationDiff);
 		setImages((prevImages) => prevImages.slice(1));
 	};
@@ -76,10 +77,14 @@ const Shooter = () => {
 				<ShooterButton onClick={handleClick} onKeyUp={handleKeyUp} />
 			</div>
 			<div className={style.cork}>
-				{images.map((src, i) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-					<img key={i} src={src} alt="コルクの残量を表示しています" />
-				))}
+				{images.length > 0 ? (
+					images.map((src, i) => (
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						<img key={i} src={src} alt="コルクの残量を表示しています" />
+					))
+				) : (
+					<p>コルクがなくなりました!</p>
+				)}
 			</div>
 		</div>
 	);

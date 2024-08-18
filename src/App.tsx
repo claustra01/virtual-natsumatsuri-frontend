@@ -6,14 +6,12 @@ import Yatai from "./pages/yatai";
 
 const AppRoutes = () => {
 	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/shooter" element={<Shooter />} />
-				<Route path="/yatai" element={<Yatai />} />
-				<Route path="/result" element={<Result />} />
-			</Routes>
-		</>
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/shooter" element={<Shooter />} />
+			<Route path="/result" element={<Result score={0} />} />
+			<Route path="/yatai" element={<Yatai />} />
+		</Routes>
 	);
 };
 
