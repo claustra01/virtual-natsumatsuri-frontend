@@ -7,22 +7,20 @@ import { useOrientation } from "../../hooks/useOrientation";
 import { useSocketReceiver } from "../../hooks/useSocketReceiver";
 import { useSocketSender } from "../../hooks/useSocketSender";
 import { useUUIDStore } from "../../store";
+import { useScoreStore } from "../../store/useScoreStore";
 import { message_type } from "../../type/schema";
 import { MessageType } from "../../type/shooting";
 import style from "./index.module.css";
 
-type ShooterProps = {
-	setScore: (score: number) => void;
-};
-
-const Shooter = ({ setScore }: ShooterProps) => {
+const Shooter = () => {
 	const [isOpen, setIsOpen] = useState(true);
-	const [score, setScoreState] = useState<number>(0);
 	const { orientationDiff } = useOrientation();
 	const { sendData } = useSocketSender();
 	const { onMessage } = useSocketReceiver();
 	const uuid = useUUIDStore((state) => state.uuid);
 	const navigate = useNavigate();
+	const score = useScoreStore((state) => state.score);
+	const setScore = useScoreStore((state) => state.setScore);
 
 	const initialImages = [
 		"/2D_material/cork.webp",
@@ -38,28 +36,22 @@ const Shooter = ({ setScore }: ShooterProps) => {
 			sendData(message_type.status, uuid, orientationDiff);
 		}, 100);
 
-		return () => {
-			if (intervalId !== null) {
-				clearInterval(intervalId);
-			}
-		};
+		return () => clearInterval(intervalId);
 	}, [uuid, orientationDiff, sendData]);
 
 	useEffect(() => {
 		onMessage((data) => {
 			if (data.message_type === MessageType.Hit && data.id === uuid) {
-				const newScore = score + 1;
-				setScoreState(newScore);
+				setScore((prevScore: number) => prevScore + 1);
 			}
 		});
-	}, [onMessage, uuid, score]);
+	}, [onMessage, uuid, setScore]);
 
 	useEffect(() => {
 		if (images.length === 0) {
-			setScore(score);
 			navigate("/result", { state: { score } });
 		}
-	}, [images, navigate, score, setScore]);
+	}, [images, navigate, score]);
 
 	const handleClick = () => {
 		const audio = new Audio("/sound/cork_sound.mp3");

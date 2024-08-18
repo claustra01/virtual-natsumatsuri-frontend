@@ -42,7 +42,7 @@ const Result = ({ score }: ResultProps) => {
 			</div>
 			<div className={styles["share-btn"]}>
 				<a
-					href={`https://twitter.com/intent/tweet?text=Webの射的で遊んだよ。${score}本倒した！%20%23virtualnatsumatsuri`}
+					href={`https://twitter.com/intent/tweet?text=Webの射的で遊んだよ。${score}本倒した！%20%23ハックツ夏祭り`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
