@@ -7,6 +7,7 @@ type State = {
 
 type Action = {
 	updateTargetStatus: (index: number, status: TargetStatus) => void;
+	resetTargetStatus: () => void;
 };
 
 export const useTargetStatusStore = create<State & Action>((set) => ({
@@ -18,4 +19,8 @@ export const useTargetStatusStore = create<State & Action>((set) => ({
 			targetStatus[index] = status;
 			return { targetStatus };
 		}),
+	resetTargetStatus: () =>
+		set(() => ({
+			targetStatus: [TargetStatus.Live, TargetStatus.Live, TargetStatus.Live],
+		})),
 }));
