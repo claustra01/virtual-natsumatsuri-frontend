@@ -7,14 +7,10 @@ type ResultProps = {
 };
 
 const Result = ({ score }: ResultProps) => {
-	const images = [
-		"/drink/bottle0.webp",
-		"/drink/bottle1.webp",
-		"/drink/bottle2.webp",
-		"/drink/bottle3.webp",
-	];
-
-	const image = images[score] || images[0];
+	const image =
+		score >= 0 && score <= 3
+			? `/drink/bottle${score}.webp`
+			: "/drink/bottle0.webp";
 
 	return (
 		<div>

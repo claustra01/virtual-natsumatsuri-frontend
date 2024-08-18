@@ -20,7 +20,7 @@ const Shooter = () => {
 	const uuid = useUUIDStore((state) => state.uuid);
 	const navigate = useNavigate();
 	const score = useScoreStore((state) => state.score);
-	const setScore = useScoreStore((state) => state.setScore);
+	const addOneScore = useScoreStore((state) => state.addOneScore);
 
 	const initialImages = [
 		"/2D_material/cork.webp",
@@ -42,10 +42,10 @@ const Shooter = () => {
 	useEffect(() => {
 		onMessage((data) => {
 			if (data.message_type === MessageType.Hit && data.id === uuid) {
-				setScore((prevScore: number) => prevScore + 1);
+				addOneScore();
 			}
 		});
-	}, [onMessage, uuid, setScore]);
+	}, [onMessage, uuid, addOneScore]);
 
 	useEffect(() => {
 		if (images.length === 0) {
