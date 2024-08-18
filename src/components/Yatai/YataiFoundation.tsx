@@ -31,7 +31,7 @@ export const YataiFoundation = (props: ThreeElements["mesh"]) => {
 			receiveShadow
 		>
 			<boxGeometry args={[...args]} />
-			<meshStandardMaterial color={"red"} />
+			<meshStandardMaterial color={"#B22D35"} />
 		</mesh>
 	);
 };
