@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useRoomIdStore, useTargetStatusStore } from "../../store";
+import { useRoomIdStore } from "../../store";
 import styles from "./index.module.css";
 
 function Gallery() {
 	const navigate = useNavigate();
 	const updateUUID = useRoomIdStore((state) => state.updateUUID);
-	const resetTargetStatus = useTargetStatusStore(
-		(state) => state.resetTargetStatus,
-	);
 
 	const handleClick = () => {
-		resetTargetStatus();
 		updateUUID();
 		navigate("/");
 	};
