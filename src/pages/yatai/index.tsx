@@ -10,10 +10,11 @@ function Yatai() {
 		(state) => state.resetTargetStatus,
 	);
 
-	// init target status
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		resetTargetStatus();
-	}, [resetTargetStatus]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className={styles.container}>
