@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import { useRoomIdStore } from "../../store";
 import styles from "./index.module.css";
 
 function Gallery() {
+	const navigate = useNavigate();
+	const updateUUID = useRoomIdStore((state) => state.updateUUID);
+
+	const handleClick = () => {
+		updateUUID();
+		navigate("/");
+	};
+
 	return (
 		<div>
 			{/* biome-ignore lint/a11y/useMediaCaption: 夏祭りの音を再生します。 */}
@@ -10,7 +20,15 @@ function Gallery() {
 				loop
 				aria-label="夏祭りの音"
 			/>
-			<h1 className={styles.title}>VIRTUAL_NATSUMATSURI</h1>
+			<h1
+				onClick={() => {
+					handleClick();
+				}}
+				onKeyDown={() => {}}
+				className={styles.title}
+			>
+				VIRTUAL_NATSUMATSURI
+			</h1>
 			<div className={styles.nobori}>
 				<img src="/2D_material/nobori.webp" alt="夏祭り_のぼり" />
 			</div>

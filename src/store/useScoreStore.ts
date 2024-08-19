@@ -1,6 +1,6 @@
-import create from "zustand";
+import { create } from "zustand";
 
-type Store = {
+type State = {
 	score: number;
 };
 
@@ -9,8 +9,14 @@ type Action = {
 	addOneScore: () => void;
 };
 
-export const useScoreStore = create<Store & Action>((set) => ({
+export const useScoreStore = create<State & Action>()((set) => ({
 	score: 0,
 	setScore: (score) => set(() => ({ score: score })),
-	addOneScore: () => set((state) => ({ score: state.score + 1 })),
+	addOneScore: () =>
+		set((state) => {
+			if (state.score > 3) {
+				return { score: 3 };
+			}
+			return { score: state.score + 1 };
+		}),
 }));

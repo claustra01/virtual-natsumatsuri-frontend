@@ -31,7 +31,6 @@ export const useSocketSender = () => {
 				message_type: mes_type,
 				event_type: event_type.shooter,
 			};
-			console.log(data);
 			socketRef?.current?.send(JSON.stringify(data));
 		},
 		[socketRef],

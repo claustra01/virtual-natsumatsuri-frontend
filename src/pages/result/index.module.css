@@ -1,36 +1,36 @@
 .result-text {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  z-index: 1;
 }
 
-.background-logo{
-    opacity: 0.6;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    
+.background-logo {
+  opacity: 0.6;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
 }
 
 .get-text {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
-    white-space: nowrap;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  white-space: nowrap;
 }
 
-.share-btn{
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
+.share-btn {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .replay-text {
@@ -39,30 +39,29 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  font-family: 'Yuji Syuku', serif, sans-serif;
+  font-family: "Yuji Syuku", serif, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-style: normal;
 }
 
 @keyframes rotate {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .get-image-container {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    animation: rotate 16s linear infinite; 
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  animation: rotate 16s linear infinite;
 }
-

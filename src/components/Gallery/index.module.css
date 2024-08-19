@@ -1,61 +1,62 @@
-h1{
-    font-size: 40px;
+h1 {
+  font-size: 40px;
 }
 
-.title{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    padding: 16px;
-    margin: 0;
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 16px;
+  margin: 0;
+  cursor: pointer;
 }
-.nobori img{
-    position: absolute;
-    bottom: 0;
-    left: -240px;
-    height: 80vh;
-    aspect-ratio: 1 / 1;
-    z-index: -1;
+.nobori img {
+  position: absolute;
+  bottom: 0;
+  left: -240px;
+  height: 80vh;
+  aspect-ratio: 1 / 1;
+  z-index: -1;
 }
 
-.light img{
-    position: absolute;
-    top: 0;
-    left: 0px;
-    height: 80vh;
-    aspect-ratio: 1 / 1;
-    z-index: -1;
+.light img {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  height: 80vh;
+  aspect-ratio: 1 / 1;
+  z-index: -1;
 }
 
 .container {
-    display: flex;
-    align-items: flex-end; 
-    position: absolute;
-    bottom: 16px; 
-    left: 4vw; 
-    z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 16px;
+  left: 4vw;
+  z-index: 1;
 }
 
 .logo img {
-    height: 16vh;
-    aspect-ratio: 1 / 1;
-    margin-right: 2vw;
+  height: 16vh;
+  aspect-ratio: 1 / 1;
+  margin-right: 2vw;
 }
 
 .shop {
-    color: var(--white);
-    font-size: 4vw;
-    padding: 16px;
-    margin: 0;
+  color: var(--white);
+  font-size: 4vw;
+  padding: 16px;
+  margin: 0;
 }
 
-.light-right img{
-    position: absolute;
-    top: 0;
-    right: 0px;
-    height: 80vh;
-    aspect-ratio: 1 / 1;
-    z-index: -1;
-    transform: scale(-1, 1);
+.light-right img {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 80vh;
+  aspect-ratio: 1 / 1;
+  z-index: -1;
+  transform: scale(-1, 1);
 }

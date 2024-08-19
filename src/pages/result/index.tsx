@@ -1,12 +1,10 @@
 import GetImage from "../../components/GetImage";
 import { DefaultButton } from "../../components/ui/Button";
+import { useScoreStore } from "../../store/useScoreStore";
 import styles from "./index.module.css";
 
-type ResultProps = {
-	score: number;
-};
-
-const Result = ({ score }: ResultProps) => {
+const Result = () => {
+	const score = useScoreStore((state) => state.score);
 	const image =
 		score >= 0 && score <= 3
 			? `/drink/bottle${score}.webp`
